@@ -1,0 +1,29 @@
+[
+    {
+        "版本列表": "https://launchermeta.mojang.com/mc/game/version_manifest.json",
+        "版本json文件": "https://launchermeta.mojang.com/v1/packages/{哈希值}/{版本号}.json",
+        "资源索引文件": "https://launchermeta.mojang.com/v1/packages/{assetIndex.sha1}/{assetIndex.id}.json",
+        "资源文件": "https://resources.download.minecraft.net/{hash的前两位字符}/{hash}",
+        "游戏主文件": "https://launcher.mojang.com/v1/objects/{downloads.client.sha1}/client.jar",
+        "依赖库文件": "https://libraries.minecraft.net/{libraries[0].downloads.artifact.path}",
+        "natives库文件": "https://libraries.minecraft.net/{libraries[0].downloads.classifiers.natives-windows.path}"
+    },
+    {
+        "版本列表": "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json",
+        "版本json文件": "https://bmclapi2.bangbang93.com/version/{版本号}/json",
+        "资源索引文件": "https://bmclapi2.bangbang93.com/v1/packages/{assetIndex.sha1}/{assetIndex.id}.json",
+        "资源文件": "https://bmclapi2.bangbang93.com/assets/{hash的前两位字符}/{hash}",
+        "游戏主文件": "https://bmclapi2.bangbang93.com/version/{版本号}/client",
+        "依赖库文件": "https://bmclapi2.bangbang93.com/maven/{libraries[0].downloads.artifact.path}",
+        "natives库文件": "https://bmclapi2.bangbang93.com/maven/{libraries[0].downloads.classifiers.natives-windows.path}"
+    },
+    {
+        "版本列表": "https://download.mcbbs.net/mc/game/version_manifest.json",
+        "版本json文件": "https://download.mcbbs.net/version/{版本号}/json",
+        "资源索引文件": "https://download.mcbbs.net/v1/packages/{assetIndex.sha1}/{assetIndex.id}.json",
+        "资源文件": "https://download.mcbbs.net/assets/{hash的前两位字符}/{hash}",
+        "游戏主文件": "https://download.mcbbs.net/version/{版本号}/client",
+        "依赖库文件": "https://download.mcbbs.net/maven/{libraries[0].downloads.artifact.path}",
+        "natives库文件": "https://download.mcbbs.net/maven/{libraries[0].downloads.classifiers.natives-windows.path}"
+    }
+]

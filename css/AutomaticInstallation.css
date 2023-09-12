@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'GenshinImpact';
+    src: url('/font/GenshinImpact.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: "GenshinImpact";
+    overflow-x: hidden;
+}
+
+body {
+    font-style: 16px;
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f149;
+}
+
+body::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb:vertical {
+    background: #8888882e;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:vertical:hover {
+    background: #0000003f;
+}
+
+.ListContainer {
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffffa0;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.ListContainer:hover {
+    box-shadow: #80CEFF 0px 0px 0px 3px;
+}
+
+.ListContainer:hover .ListTitle {
+    color: #80CEFF;
+    transition: all 0.2s;
+}
+
+.ListContainer .ListTitle {
+    width: 100%;
+    padding: 10px 0;
+    font-style: 1.3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ListContainer .ListContent {
+    display: none;
+    padding: 10px;
+}
+
+.ListContainer .ListContent .ListItem {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-style: 1.3em;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    border: 3px solid #80CEFF;
+}
+
+.ListContainer .ListContent .ListItem:hover {
+    background: #80ceff72;
+}
+
+.ListContainer .ListContent .ListItem .Left {
+    width: 46px;
+    height: 46px;
+    margin-right: 10px;
+}
+
+.ListContainer .ListContent .ListItem .Right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.ListContainer .ListContent .ListItem:hover .RightRight{
+    opacity: 1;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i{
+    transition: all 0.2s;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i:hover{
+    color: #80ceff;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i:active{
+    transform: scale(90%);
+}
+
+.ListContainer .ListContent.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

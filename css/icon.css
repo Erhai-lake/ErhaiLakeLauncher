@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "icon";
+  src: url('/font/icon.woff2') format('woff2'),
+       url('/font/icon.woff') format('woff'),
+       url('/font/icon.ttf') format('truetype');
+}
+
+.icon {
+  font-family: "icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shuaxin:before {
+  content: "\ec08";
+}
+
+.icon-tishi:before {
+  content: "\e72b";
+}
+
+.icon-bangzhu:before {
+  content: "\e620";
+}
+
+.icon-xiazaidaoru:before {
+  content: "\e8c6";
+}
+
+.icon-yijianfankui:before {
+  content: "\e61c";
+}
+
+.icon-dianyuan:before {
+  content: "\e731";
+}
+
+.icon-anquan:before {
+  content: "\ec4d";
+}
+
+.icon-pifugexinghuazhuti:before {
+  content: "\e7e8";
+}
+
+.icon-ziyuanxhdpi:before {
+  content: "\e64c";
+}
+
+.icon-daima:before {
+  content: "\e66a";
+}
+
+.icon-shezhi:before {
+  content: "\e8b7";
+}
+
+.icon-banshou:before {
+  content: "\e6fb";
+}
+
+.icon-pintu:before {
+  content: "\e6c1";
+}
+
+.icon-xiangzi:before {
+  content: "\e71f";
+}
+
+.icon-huojian:before {
+  content: "\e6e1";
+}
+
+.icon-lixian:before {
+  content: "\e645";
+}

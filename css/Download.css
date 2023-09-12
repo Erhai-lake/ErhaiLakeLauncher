@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'GenshinImpact';
+    src: url('/font/GenshinImpact.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: "GenshinImpact";
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-style: 16px;
+}
+
+.Main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+.Main .Left {
+    width: 230px;
+    height: 100%;
+    background: #ffffffcd;
+    box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s forwards;
+    transform-origin: left;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    50% {
+        transform: translateX(0%);
+        animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1.25);
+    }
+
+    60% {
+        transform: translateX(0%);
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.Main .Left .Title{
+    margin: 10px 0;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #A7949B;
+}
+
+/* 基础状态 */
+.Main .Left .Item{
+    /* width: 100%; */
+    margin: 10px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #563945;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+/* 鼠标悬停状态 */
+.Main .Left .Item:hover{
+    background: #80ecff2e;
+}
+
+/* 鼠标点击状态 */
+.Main .Left .Item:active {
+    background: #80ecff6b;
+}
+
+.Main .Left .Item .function{
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.Main .Left .Item .function:active{
+    transform: scale(90%);
+}
+
+.Main .Left .Item:hover .function{
+    opacity: 1;
+}
+
+/* 鼠标点击后状态 */
+.Main .Left .Selected {
+    padding: 0 30px;
+    border-left: 7px solid #80CEFF;
+    color: #80CEFF;
+}
+
+.Main .Left .Item .texe p {
+    line-height: 35px;
+}
+
+.Main .Left .Item .texe .icon {
+    margin: 0 5px;
+    font-weight: 900;
+}
+
+.Main .Right{
+    width: 100%;
+    height: 100%;
+    margin: 20px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Main .Right .MainIframe{
+    width: 100%;
+    height: 100%;
+}
+
+.Main .Right iframe{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    overflow-x: hidden;
+}
