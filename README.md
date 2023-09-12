@@ -21,12 +21,12 @@
 
 ## 贡献
 
-如果你希望贡献此项目，请遵循以下步骤：
-
-1. 分支出你的特性分支：`git checkout -b feature/your-feature-name`
-2. 提交你的更改：`git commit -m "Add feature"`
-3. 推送到远程仓库：`git push origin feature/your-feature-name`
-4. 创建一个 Pull Request
+如果你希望贡献此项目，请遵循以下步骤:
+1.  克隆仓库:`git clone https://github.com/Erhai-lake/ErhaiLakeLauncher.git`
+2. 分支出你的特性分支:`git checkout -b feature/your-feature-name`
+3. 提交你的更改:`git commit -m "Add feature"`
+4. 推送到远程仓库:`git push origin feature/your-feature-name`
+5. 创建一个 Pull Request
 
 ## 帮忙
 

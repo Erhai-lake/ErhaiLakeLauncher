@@ -50,7 +50,7 @@ $OldVersionNum = 0;
 $OldVersionHtml = "";
 
 // Wiki
-$Wiki = json_decode(file_get_contents('VersionsWiki.json'),true);
+$Wiki = json_decode(file_get_contents('VersionsWiki.json'), true);
 
 // 循环取数组
 if (is_array($AllVersions)) {
@@ -59,10 +59,10 @@ if (is_array($AllVersions)) {
         $DateTime = new DateTime($OriginalTime);
         $Time = $DateTime->format('Y-m-d H:i:s');
         $Html1 = '<div class="ListItem" onclick="Download(\'' . $item["id"] . '\')"><div class="Left" style="background: url(\'';
-        if($Wiki[$item["id"]] == ""){
+        if ($Wiki[$item["id"]] == "") {
             $Html2 = '\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div></div></div>';
-        }else{
-            $Html2 = '\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div><div class="RightRight"><i class="icon icon-tishi" title="更新日志" onclick="Download(\'测试:' . $item["id"] . '\'); event.stopPropagation();"></i></div></div></div>';
+        } else {
+            $Html2 = '\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div><div class="RightRight"><i class="icon icon-tishi" title="更新日志" onclick="window.open(\'' . $Wiki[$item["id"]] . '\'); event.stopPropagation();"></i></div></div></div>';
         }
         // 获取最新正式版和发布时间
         if ($item["id"] == LatestOfficiaVersion($VersionFile)) {
