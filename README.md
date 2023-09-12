@@ -40,29 +40,29 @@
 
 ### 主界面
 
-![1](README\1.png)
+![1](README/1.png)
 
 ### 3D皮肤渲染
 
-| ![3](README\2.png) |![2](README\3.png)      |
+| ![3](README/2.png) |![2](README/3.png)      |
 | -------------------------------------------- | ---- |
 
 ### 小窗口展示
 
-![4](README\4.png)
+![4](README/4.png)
 
 ### 自定义主页
 
-![6](README\6.png)
+![6](README/6.png)
 
 ### 全局配色
 
-![7](README\7.png)
+![7](README/7.png)
 
 ### 全局灰度
 
-![8](README\8.png)
+![8](README/8.png)
 
 ### 可折叠下载页
 
-![5](README\5.png)
+![5](README/5.png)
