@@ -20,7 +20,7 @@ if (!file_exists($filename)) {
         'Hitokoto' => true,
         'Custom' => false,
         'CustomURL' => '',
-        'Source' => 0
+        'Source' => 3
     );
     $jsonData = json_encode($configData);
     if (!file_put_contents($filename, $jsonData)) {

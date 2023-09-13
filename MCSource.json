@@ -9,7 +9,7 @@
         "natives库文件": "https://libraries.minecraft.net/{libraries[0].downloads.classifiers.natives-windows.path}"
     },
     {
-        "版本列表": "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json",
+        "版本列表": "https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json",
         "版本json文件": "https://bmclapi2.bangbang93.com/version/{版本号}/json",
         "资源索引文件": "https://bmclapi2.bangbang93.com/v1/packages/{assetIndex.sha1}/{assetIndex.id}.json",
         "资源文件": "https://bmclapi2.bangbang93.com/assets/{hash的前两位字符}/{hash}",

@@ -2,12 +2,13 @@
 // 资源类
 
 // 初始化源
-// 参数:源(0:官方,:BMCLAPI,2:MCBBS;默认:0)
+// 参数:源(0:官方,1:BMCLAPI,2:MCBBS,3:自动选择;默认:0)
 // 返回:下载源json,1:无法读取下载源文件,2:下载源文件解析失败,3:源不存在
 function InitializeSource($Source = 0)
 {
     // 读取MCSource.json文件
     $json = file_get_contents("MCSource.json");
+
     // 检查文件是否成功读取
     if ($json === false) {
         return 1;
@@ -20,11 +21,47 @@ function InitializeSource($Source = 0)
         return 2;
     }
 
-    // 检查指定的源是否存在
-    if (isset($sources[$Source])) {
-        return $sources[$Source];
-    } else {
-        return 3;
+    if ($Source != 3) {
+        // 检查指定的源是否存在
+        if (isset($sources[$Source])) {
+            return $sources[$Source];
+        } else {
+            return 3;
+        }
+    } else if ($Source == 3) {
+        // 初始化结果数组
+        $latencyResults = array();
+        // 遍历每个网站并测试连接延迟
+        foreach ($sources as $website) {
+            $startTime = microtime(true);
+            // 使用cURL初始化连接
+            $ch = curl_init($website["版本列表"]);
+            // 设置cURL选项，以便仅获取头部信息，不下载页面内容
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_NOBODY, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10); // 设置超时时间
+            // 执行cURL请求
+            curl_exec($ch);
+            // 获取cURL请求的总时间（毫秒）
+            $totalTime = (microtime(true) - $startTime) * 1000;
+            // 关闭cURL连接
+            curl_close($ch);
+            // 将结果存储到数组中
+            $latencyResults[$website["版本列表"]] = $totalTime;
+        }
+        // 找到最低延迟的网站
+        $minLatency = min($latencyResults);
+        $fastestWebsite = array_search($minLatency, $latencyResults);
+        if ($fastestWebsite == $sources[0]["版本列表"]) {
+            return $sources[0];
+        } else if ($fastestWebsite == $sources[1]["版本列表"]) {
+            return $sources[1];
+        } else if ($fastestWebsite == $sources[2]["版本列表"]) {
+            return $sources[2];
+        }else{
+            return 3;
+        }
     }
 }
 
