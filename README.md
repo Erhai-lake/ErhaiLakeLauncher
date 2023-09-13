@@ -8,33 +8,48 @@
 
 ## 项目负责人
 
-* Erhai_lake
-* fuzixuan0714_0826@163.com
+- Erhai_lake
+- fuzixuan0714_0826@163.com
 
 ## 功能
 
-* 皮肤3D展示
-* 自定义主页信息
-* 主题色高度自定义
-* 支持全局灰度配色
-* 获取 `Minecraft` 版本信息
+- 皮肤3D展示
+- 自定义主页信息
+- 主题色高度自定义
+- 支持全局灰度配色
+- 获取 `Minecraft` 版本信息
 
 ## 贡献
 
-如果你希望贡献此项目，请遵循以下步骤:
-1.  克隆仓库:`git clone https://github.com/Erhai-lake/ErhaiLakeLauncher.git`
-2. 分支出你的特性分支:`git checkout -b feature/your-feature-name`
-3. 提交你的更改:`git commit -m "Add feature"`
-4. 推送到远程仓库:`git push origin feature/your-feature-name`
-5. 创建一个 Pull Request
+### 报告问题 
 
-## 帮忙
+- 如果你在使用项目时发现了问题,或者有改进建议,请前往 [Issues页面](https://github.com/Erhai-lake/ErhaiLakeLauncher/issues) 创建一个新的 Issue 来报告问题或提出建议.
+- 请确保检查之前的 Issues ,以确保你的问题或建议尚未被其他人提交.
 
-想请大伙帮个忙 `VersionsWiki.json` 是各版本的Wiki页,希望大伙可以帮忙填完,谢谢啦~
+### 参与贡献
 
-例子:版本1.20.1的Wiki是 `https://minecraft.fandom.com/zh/wiki/Java版1.20.1` 
+- 如果你想参与贡献代码,修复错误或增加新特性,请按照以下步骤进行:
+  - Fork 本仓库到你自己的 GitHub 账户.
+  - 创建一个新的分支,以便你可以在上面进行工作.
+  - 在你的分支上进行修改或添加新的功能.
+  - 确保你的代码通过了项目的测试或验证流程.
+  - 提交你的更改.
+  - 将你的分支推送到你的 GitHub 仓库.
+  - 创建一个 Pull Request（PR）以便将你的更改合并到主仓库.
+- 请确保你的代码遵循项目的编码规范,并附上详细的描述,以便项目维护者更容易审查和接受你的 PR.
 
-在 `VersionsWiki.json` 找到该版本后添加进去接口
+### 开发环境设置
+
+项目环境为 PHP ,Apache 或 Nginx 都可以
+
+## 计划
+
+- [ ] 完善下载功能
+- [ ] 完善设置功能
+- [ ] 完善更多功能
+- [ ] 完善启动游戏功能
+- [ ] 完善微软登入功能
+
 
 ## 截图
 
