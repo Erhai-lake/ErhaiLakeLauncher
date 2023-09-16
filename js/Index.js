@@ -27,22 +27,12 @@ function addNotification(type, message) {
     // 3秒后自动移除通知
     setTimeout(function () {
         removeNotification(notification);
-    }, 3000);
+    }, 3100);
 }
 
 // 移除通知
 function removeNotification(notification) {
-    // 触发 CSS 动画
-    var i = 1;
-    var SetInterval = setInterval(function () {
-        if (i <= 0) {
-            clearInterval(SetInterval)
-            notificationContainer.removeChild(notification);
-        } else {
-            i = i - 0.1
-            notification.style.opacity = i;
-        }
-    }, 10);
+    notificationContainer.removeChild(notification);
 }
 
 // addNotification("Normal", "这是常规通知");
