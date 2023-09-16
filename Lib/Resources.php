@@ -54,13 +54,10 @@ function InitializeSource($Source = 0)
         $minLatency = min($latencyResults);
         $fastestWebsite = array_search($minLatency, $latencyResults);
         if ($fastestWebsite == $sources[0]["版本列表"]) {
-            echo '0';
             return $sources[0];
         } else if ($fastestWebsite == $sources[1]["版本列表"]) {
-            echo '1';
             return $sources[1];
         } else if ($fastestWebsite == $sources[2]["版本列表"]) {
-            echo '2';
             return $sources[2];
         }else{
             return 3;
