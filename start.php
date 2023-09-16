@@ -24,6 +24,7 @@ if ($Config["Custom"]) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>洱海启动器</title>
+    <link rel="stylesheet" href="css/Main.css">
     <link rel="stylesheet" href="css/Start.css">
     <link rel="stylesheet" href="css/icon.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -93,7 +94,7 @@ if ($Config["Custom"]) {
             </div>
             <div class="Skin2D" style="background: url('img/steve2.png') no-repeat 100% 100%/100% 100%;"></div>
             <div class="Skin3D">
-                <iframe id="Skin3DIframe" src="Skin3D.php"></iframe>
+                <iframe id="Skin3DIframe" src="/Skin3D.php"></iframe>
             </div>
             <p class="Name">Steve</p>
             <div class="MainBut">

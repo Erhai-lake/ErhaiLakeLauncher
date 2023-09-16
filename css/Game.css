@@ -1,0 +1,33 @@
+.Main {
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffffa0;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.Main:hover {
+    box-shadow: #80CEFF 0px 0px 0px 3px;
+}
+
+
+.Main:hover .MainTitle {
+    color: #80CEFF;
+    transition: all 0.2s;
+}
+
+.Main .MainTitle {
+    width: 100%;
+    padding: 10px 0;
+    font-style: 1.3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.MainContainer .MainContent {
+    display: none;
+    padding: 10px;
+}

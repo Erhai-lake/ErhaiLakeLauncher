@@ -3,6 +3,7 @@ error_reporting(0);
 require "Lib/Auxiliary.php";
 
 $Name = "ELL";
+$addNotification = '';
 
 // 初始化
 if (Initialize($Name) == 1) {
@@ -14,7 +15,8 @@ $filename = $Name . "/config.json";
 if (!file_exists($filename)) {
     $configData = array(
         'Name' => $Name,
-        'Version' => "1.0.0",
+        'Version' => '1.0.0',
+        'Theme' => '洱海蓝',
         'ThemeColor' => '#80CEFF',
         'grayscale' => false,
         'Hitokoto' => true,
@@ -45,6 +47,7 @@ if($Config["grayscale"]){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>洱海启动器</title>
+    <link rel="stylesheet" href="css/Main.css">
     <link rel="stylesheet" href="css/Index.css">
     <link rel="stylesheet" href="css/icon.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -83,7 +86,7 @@ if($Config["grayscale"]){
             </div>
         </div>
         <div class="MainIframe">
-            <iframe id="MainIframe" src="Skin3D.php"></iframe>
+            <iframe id="MainIframe" src="start.php"></iframe>
         </div>
     </div>
     <script src="js/Index.js"></script>

@@ -4,6 +4,7 @@ require "Lib/Auxiliary.php";
 require "Lib/Resources.php";
 
 $Name = "ELL";
+$addNotification = '';
 
 // 读取配置文件
 $Config = json_decode(file_get_contents($Name . "/config.json"), true);
@@ -26,9 +27,18 @@ if (file_exists($fileName)) {
 } else {
     // 初始化源
     $Source = InitializeSource($Config["Source"]);
-    // 初始化版本文件
-    $VersionFile = InitializeVersionFile($Source);
-    file_put_contents($fileName, $VersionFile);
+    if ($Source == 1 || $Source == 2 || $Source == 3) {
+        $addNotification .= "window.parent.parent.addNotification('Warn', '初始化错误!');";
+    } else {
+        // 初始化版本文件
+        $VersionFile = InitializeVersionFile($Source);
+        if ($VersionFile == 1) {
+            $addNotification .= "window.parent.parent.addNotification('Warn', '初始化错误!');";
+        } else {
+            file_put_contents($fileName, $VersionFile);
+        }
+    }
+    $addNotification .= "window.parent.parent.addNotification('Normal', '刷新成功!');";
 }
 
 // 获取所有版本信息
@@ -49,43 +59,82 @@ $BetaVersionHtml = "";
 $OldVersionNum = 0;
 $OldVersionHtml = "";
 
-// Wiki
-$Wiki = json_decode(file_get_contents('VersionsWiki.json'), true);
-
 // 循环取数组
 if (is_array($AllVersions)) {
     foreach ($AllVersions as $item) {
         $OriginalTime = $item["time"];
         $DateTime = new DateTime($OriginalTime);
         $Time = $DateTime->format('Y-m-d H:i:s');
-        $Html1 = '<div class="ListItem" onclick="Download(\'' . $item["id"] . '\')"><div class="Left" style="background: url(\'';
-        if ($Wiki[$item["id"]] == "") {
-            $Html2 = '\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div></div></div>';
+        // Wiki
+        $WikiLink = '';
+        $link1 = 'https://minecraft.fandom.com/zh/wiki/';
+        $link2 = $link1 . 'Java版';
+        // 正则表达式
+        $patterns = [
+            '/^\d+\.\d+(\.\d+)?$/' => $link2,
+            '/^\d{2}w\d{2}[a-e]?$/' => $link1,
+            '/^(\d+\.\d+(\.\d+)?)\-pre\d+$/' => $link2,
+            '/^(\d+\.\d+(\.\d+)?)\-rc\d+$/' => $link2,
+            '/^(\d+\.\d+(\.\d+)?\s+(Pre-Release|3D Shareware|RV-Pre|b|a|c|r\d+))(\s+\d+)?$/' => 'https://minecraft.fandom.com/wiki/Java_Edition_',
+            '23w13a_or_b'  => $link1 . '23w13a_or_b',
+            '22w13oneblockatatime'  => $link1 . '22w13oneblockatatime',
+            '20w14infinite'  => $link1 . '20w14%E2%88%9E',
+            '3D Shareware v1.34'  => $link1 . '3D_Shareware_v1.34',
+            '1.RV-Pre1' => $link2 . '1.RV-Pre1',
+            'inf-20100618' => $link2 . 'Infdev_20100618',
+            'c0.30_01c' => $link2 . 'Classic_0.30',
+            'c0.0.13a' => $link2 . 'Classic_0.0.14a_08',
+            'c0.0.13a_03' => $link2 . 'Classic_0.0.13a_03',
+            'c0.0.11a' => $link2 . 'Classic_0.0.11a',
+            '/^b(\d+\.\d+(?:\.\d+)*)$/' => $link2 . 'Beta_',
+            '/^a(\d+\.\d+(?:\.\d+)*)$/' => $link2 . 'Alpha_v',
+            '/^b(\d+\.\d+(?:\.\d+)*+_\d+)$/' => $link2 . 'Beta_',
+            '/^a(\d+\.\d+(?:\.\d+)*+_\d+)$/' => $link2 . 'Alpha_v',
+            '/^b(\d+\.\d+(?:\.\d+)*+)[a-z]?$/' => $link2 . 'Beta_',
+            '/^a(\d+\.\d+(?:\.\d+)*+)[a-z]?$/' => $link2 . 'Alpha_v',
+            '/^rd-(\d+)$/' => $link2 . 'Pre-classic_rd-',
+        ];
+        foreach ($patterns as $pattern => $link) {
+            if (@preg_match($pattern, $item["id"]) === false) {
+                $WikiLink = $link;
+            } elseif (preg_match($pattern, $item["id"], $matches)) {
+                if ($link == $link2 . 'Beta_' || $link == $link2 . 'Alpha_v') {
+                    $WikiLink = $link . $matches[1];
+                } else {
+                    $WikiLink = $link . $matches[0];
+                }
+                break;
+            }
+        }
+
+        $Html1 = '<div class="ListItem" onclick="Download(\'' . $item["id"] . '\')"><div class="Left" style="background: url(\'img/';
+        if ($WikiLink == "") {
+            $Html2 = '.png\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div></div></div>';
         } else {
-            $Html2 = '\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div><div class="RightRight"><i class="icon icon-tishi" title="更新日志" onclick="window.open(\'' . $Wiki[$item["id"]] . '\'); event.stopPropagation();"></i></div></div></div>';
+            $Html2 = '.png\') no-repeat 100% 100%/100% 100%;"></div><div class="Right"><div class="RightLeft"><p class="ItemTitle">' . $item["id"] . '</p><p class="ItemTime">' . $Time . '</p></div><div class="RightRight"><i class="icon icon-tishi" title="Wiki" onclick="window.open(\'' . $WikiLink . '\'); event.stopPropagation();"></i></div></div></div>';
         }
         // 获取最新正式版和发布时间
         if ($item["id"] == LatestOfficiaVersion($VersionFile)) {
-            $LatestOfficiaVersionHtml = $Html1 . 'img/grass.png' . $Html2;
+            $LatestOfficiaVersionHtml = $Html1 . 'grass' . $Html2;
         }
         // 获取最新快照和发布时间
         if ($item["id"] == LatestBetaVersion($VersionFile)) {
-            $LatestBetaVersionHtml = $Html1 . 'img/tnt.png' . $Html2;
+            $LatestBetaVersionHtml = $Html1 . 'tnt' . $Html2;
         }
         // 获取所有正式版和时间
         if ($item["type"] == "release") {
             $OfficialVersionNum++;
-            $OfficialVersionHtml .= $Html1 . 'img/grass.png' . $Html2;
+            $OfficialVersionHtml .= $Html1 . 'grass' . $Html2;
         }
         // 获取所有快照和时间
         if ($item["type"] == "snapshot") {
             $BetaVersionNum++;
-            $BetaVersionHtml .= $Html1 . 'img/tnt.png' . $Html2;
+            $BetaVersionHtml .= $Html1 . 'tnt' . $Html2;
         }
         // 获取所有远古和时间
         if ($item["type"] == "old_alpha" || $item["type"] == "old_beta") {
             $OldVersionNum++;
-            $OldVersionHtml .= $Html1 . 'img/deepslate.png' . $Html2;
+            $OldVersionHtml .= $Html1 . 'deepslate' . $Html2;
         }
     }
 }
@@ -97,6 +146,7 @@ if (is_array($AllVersions)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>洱海启动器</title>
+    <link rel="stylesheet" href="css/Main.css">
     <link rel="stylesheet" href="css/AutomaticInstallation.css">
     <link rel="stylesheet" href="css/icon.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -159,6 +209,9 @@ if (is_array($AllVersions)) {
     </div>
     <script src="js/AutomaticInstallation.js"></script>
     <script src="js/Main.js"></script>
+    <script>
+        <?php echo $addNotification; ?>
+    </script>
 </body>
 
 </html>

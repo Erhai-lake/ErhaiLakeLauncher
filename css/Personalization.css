@@ -1,0 +1,234 @@
+.Main {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #ffffffa0;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.Main:hover {
+    box-shadow: #80ceff 0px 0px 0px 3px;
+}
+
+.Main .MainTitle {
+    width: 100%;
+    padding: 10px 0;
+    font-style: 1.3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Main:hover .MainTitle {
+    color: #80CEFF;
+    transition: all 0.2s;
+}
+
+.Main .MainContent {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Main .MainContent .RadioMain div {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.Main .MainContent .RadioMain div p {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    color: #333;
+}
+
+.Main .MainContent .RadioMain div p:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #80CEFF;
+    border-radius: 50%;
+}
+
+.Main {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #ffffffa0;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.Main:hover {
+    box-shadow: rgb(128, 206, 255) 0px 0px 0px 3px;
+}
+
+.Main .MainTitle {
+    width: 100%;
+    padding: 10px 0;
+    font-style: 1.3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Main:hover .MainTitle {
+    color: #80CEFF;
+    transition: all 0.2s;
+}
+
+.Main .MainContent {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Main .MainContent .RadioMain {
+    width: 100%;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#zdy {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 2px solid #80CEFF;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+button:hover {
+    background: #80ceff70;
+}
+
+button:active {
+    transform: scale(90%);
+}
+
+.color-slider {
+    width: 200px;
+}
+
+.color-preview {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    background-color: rgb(0, 0, 0);
+}
+
+.Main .MainContent .RadioMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Main .MainContent .RadioMain .a div label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.Main .MainContent .RadioMain .a div input[type="radio"],
+.Main .MainContent .RadioMain .a div input[type="checkbox"] {
+    display: none;
+}
+
+.Main .MainContent .RadioMain .a div .RadioTitle {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.15s;
+}
+
+.Main .MainContent .RadioMain .a div .RadioTitle::before,
+.Main .MainContent .RadioMain .a div .RadioTitle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #80CEFF;
+    box-sizing: border-box;
+}
+
+.Main .MainContent .RadioMain .a div .RadioTitle::after {
+    width: 11px;
+    height: 11px;
+    top: 2px;
+    left: 2px;
+    border: 2px solid transparent;
+}
+
+.Main .MainContent .RadioMain .a div input[type="radio"]:checked+.RadioTitle::after,
+.Main .MainContent .RadioMain .a div input[type="checkbox"]:checked+.RadioTitle::after {
+    width: 11px;
+    height: 11px;
+    top: 4.5px;
+    left: 4.5px;
+    background: #80CEFF;
+}
+
+.Main .MainContent .RadioMain .a div:hover .RadioTitle {
+    color: #80CEFF;
+}
+
+.Main .MainContent .RadioMain div .InputText {
+    margin-right: 10px;
+}
+
+.Main .MainContent .RadioMain div input[type="text"] {
+    height: 18px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: transparent;
+    border: 1px solid #80CEFF;
+    transition: all 0.2s;
+}
+
+.Main .MainContent .RadioMain div input[type="text"]:hover {
+    background: #80CEFF65;
+}
+
+.Main .MainContent .RadioMain div input[type="text"]:focus {
+    outline: none;
+    border: 1px solid #80CEFF;
+    background: #80CEFF65;
+}
+
+#zdylj{
+    display: none;
+}

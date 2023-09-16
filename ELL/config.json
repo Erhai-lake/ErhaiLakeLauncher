@@ -1,10 +1,1 @@
-{
-    "Name": "ELL",
-    "Version": "1.0.0",
-    "ThemeColor": "#80CEFF",
-    "grayscale": false,
-    "Hitokoto": true,
-    "Custom": false,
-    "CustomURL": "",
-    "Source": 3
-}
+{"Name":"ELL","Version":"1.0.0","Theme":"Erhai_lake","ThemeColor":"#80CEFF","grayscale":false,"Hitokoto":true,"Custom":false,"CustomURL":"https:\/\/www.bilibili.com\/","Source":3}

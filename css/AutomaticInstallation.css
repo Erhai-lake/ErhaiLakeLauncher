@@ -1,39 +1,3 @@
-@font-face {
-    font-family: 'GenshinImpact';
-    src: url('/font/GenshinImpact.ttf') format('truetype');
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    font-family: "GenshinImpact";
-    overflow-x: hidden;
-}
-
-body {
-    font-style: 16px;
-}
-
-body::-webkit-scrollbar {
-    width: 5px;
-}
-
-body::-webkit-scrollbar-track {
-    background: #f1f1f149;
-}
-
-body::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb:vertical {
-    background: #8888882e;
-    border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb:hover,
-body::-webkit-scrollbar-thumb:vertical:hover {
-    background: #0000003f;
-}
-
 .ListContainer {
     width: 80%;
     margin: 10px auto;

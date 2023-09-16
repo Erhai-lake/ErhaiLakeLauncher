@@ -1,24 +1,10 @@
 @font-face {
-    font-family: 'GenshinImpact';
-    src: url('/font/GenshinImpact.ttf') format('truetype');
-}
-
-@font-face {
     font-family: 'Minecraft';
     src: url('/font/Minecraft.ttf') format('truetype');
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    font-family: "GenshinImpact";
-}
-
 body {
-    height: 100vh;
     overflow: hidden;
-    font-style: 16px;
 }
 
 .Main {
