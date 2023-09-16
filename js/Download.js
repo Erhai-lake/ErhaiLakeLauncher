@@ -1,3 +1,5 @@
+const MainIframe = document.getElementById("MainIframe")
+
 let SelectedDiv = null;
 function Selected(event, type) {
     if (SelectedDiv !== null) {
@@ -5,11 +7,11 @@ function Selected(event, type) {
     }
     let div = event.currentTarget;
     div.classList.add('Selected');
-    document.getElementById("MainIframe").src = type + ".php";
+    MainIframe.src = type + ".php";
     SelectedDiv = div;
 }
 document.querySelector('.Selected').click();
 
 function Refresh(url) {
-    document.getElementById("MainIframe").src = url;
+    MainIframe.src = url;
 }
