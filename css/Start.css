@@ -230,6 +230,7 @@ body {
     margin: 5px 0;
     font-style: 1.3em;
     text-align: center;
+    pointer-events: none;
 }
 
 .Main .Right iframe{
