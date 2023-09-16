@@ -10,7 +10,6 @@ function Selected(event, type) {
 }
 document.querySelector('.Selected').click();
 
-
 // 获取通知容器
 var notificationContainer = document.getElementById("notificationContainer");
 // 添加通知
