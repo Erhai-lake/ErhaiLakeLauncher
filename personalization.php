@@ -93,6 +93,27 @@ $CustomURL = $Config["CustomURL"];
         .Main .MainContent .RadioMain .a div:hover .RadioTitle {
             color: <?php echo $ThemeColor; ?>;
         }
+
+        .Main .MainContent .RadioMain div input[type="text"] {
+            border: <?php echo '1px solid ' . $ThemeColor; ?>;
+        }
+
+        .Main .MainContent .RadioMain div input[type="text"]:hover {
+            background: <?php echo $ThemeColor . '65'; ?>;
+        }
+
+        .Main .MainContent .RadioMain div input[type="text"]:focus {
+            border: <?php echo '1px solid ' . $ThemeColor; ?>;
+            background: <?php echo $ThemeColor . '65'; ?>;
+        }
+
+        button {
+            border: <?php echo '2px solid ' . $ThemeColor; ?>;
+        }
+
+        button:hover {
+            background: <?php echo $ThemeColor . '70'; ?>;
+        }
     </style>
 </head>
 
