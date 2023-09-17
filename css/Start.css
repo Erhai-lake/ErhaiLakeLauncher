@@ -156,7 +156,7 @@ body {
     color: #696969;
 }
 
-.Main .Left .MainBut{
+.Main .Left .MainBut {
     position: fixed;
     width: 100%;
     bottom: 2%;
@@ -193,7 +193,7 @@ body {
     transform: scale(90%);
 }
 
-.Main .Right{
+.Main .Right {
     width: 73%;
     height: 100%;
     margin: 0 20px;
@@ -203,7 +203,8 @@ body {
     flex-direction: column;
 }
 
-.Main .Right .Sentence{
+.Main .Right .Sentence {
+    position: relative;
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -214,18 +215,18 @@ body {
     transition: all 0.2s;
 }
 
-.Main .Right .Sentence:hover{
+.Main .Right .Sentence:hover {
     box-shadow: #80CEFF 0px 0px 0px 3px;
 }
 
-.Main .Right .Sentence:hover .Title{
+.Main .Right .Sentence:hover .Title {
     color: #80CEFF;
     transition: all 0.2s;
 }
 
 .Main .Right .Sentence .Title,
 .Main .Right .Sentence #SentenceTitle,
-.Main .Right .Sentence #SentenceSource{
+.Main .Right .Sentence #SentenceSource {
     width: 100%;
     margin: 5px 0;
     font-style: 1.3em;
@@ -233,7 +234,50 @@ body {
     pointer-events: none;
 }
 
-.Main .Right iframe{
+#heart-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    background-image: url("/img/heart.png");
+    background-size: contain;
+    animation-name: heartbeat;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#heart-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.Main .Right iframe {
     width: 100%;
     height: 100%;
     margin-bottom: 10px;
@@ -244,6 +288,6 @@ body {
     overflow-x: hidden;
 }
 
-.Main .Right iframe:hover{
+.Main .Right iframe:hover {
     box-shadow: #80CEFF 0px 0px 0px 3px;
 }

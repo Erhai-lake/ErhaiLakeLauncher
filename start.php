@@ -10,7 +10,7 @@ $Config = json_decode(file_get_contents($Name . "/config.json"), true);
 $ThemeColor = $Config["ThemeColor"];
 // 一言
 if ($Config["Hitokoto"]) {
-    $Hitokoto = "<div class='Sentence' onclick='SentenceOpen()' title='催什么催,真的是,哼~'><p class='Title'>一言</p><p id='SentenceTitle'>:D 获取中...</p><p id='SentenceSource'>快了快了...</p></div>";
+    $Hitokoto = '<div class="Sentence" title="催什么催,真的是,哼~"><p class="Title">一言</p><p id="SentenceTitle">:D 获取中...</p><p id="SentenceSource">快了快了...</p><div id="heart-icon"></div><div id="heart-number">0</div></div>';
 }
 // 自定义
 if ($Config["Custom"]) {
