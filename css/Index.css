@@ -12,8 +12,9 @@ body {
     height: 85%;
     top: 12%;
     display: flex;
+    justify-content: left;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column-reverse;
     overflow: hidden;
     z-index: 999;
     pointer-events: none;
