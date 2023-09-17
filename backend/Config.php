@@ -13,21 +13,26 @@ if (isset($_GET['type']) && isset($_GET['value'])) {
             switch ($value) {
                 case "Erhai_lake":
                     $Config['ThemeColor'] = '#80CEFF';
+                    echo 'ok';
                     break;
                 case "Qi_Month":
                     $Config['ThemeColor'] = '#E61D39';
+                    echo 'ok';
                     break;
                 case "cqy":
                     $Config['ThemeColor'] = '#EDB2C9';
+                    echo 'ok';
                     break;
                 case "grayscale":
                     $Config['ThemeColor'] = '#80CEFF';
                     $Config['grayscale'] = true;
+                    echo 'ok';
                     break;
                 default:
                     if (preg_match('/^\d+\|\d+\|\d+$/', $value)) {
                         $rgb = explode("|", $value);
                         $Config['ThemeColor'] = sprintf("#%02x%02x%02x", max(0, min(255, $rgb[0])), max(0, min(255, $rgb[1])), max(0, min(255, $rgb[2])));
+                        echo 'ok';
                     }
                     break;
             }
@@ -37,19 +42,24 @@ if (isset($_GET['type']) && isset($_GET['value'])) {
                 case 'Hitokoto':
                     if ($Config['Hitokoto']) {
                         $Config['Hitokoto'] = false;
+                        echo 'ok';
                     } else {
                         $Config['Hitokoto'] = true;
+                        echo 'ok';
                     }
                     break;
                 case 'Custom':
                     if ($Config['Custom']) {
                         $Config['Custom'] = false;
+                        echo 'ok';
                     } else {
                         $Config['Custom'] = true;
+                        echo 'ok';
                     }
                 default:
-                    if (preg_match('/\bhttps?:\/\/\S+\b/i', $value)) {
+                    if (preg_match('/^(https?:\/\/)?([a-z0-9-]+\.)?[a-z0-9-]+\.[a-z]+(\/[^\s]*)?$/i', $value)) {
                         $Config['CustomURL'] = $value;
+                        echo 'ok';
                     }
             }
     }

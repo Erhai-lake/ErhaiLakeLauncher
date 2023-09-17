@@ -3,7 +3,10 @@ function ajax(URL) {
     xhr.open("GET", URL, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var responseData = JSON.parse(xhr.responseText);
+            var responseData = xhr.responseText
+            if(responseData == 'ok'){
+                window.parent.parent.addNotification('Normal', '设置成功!');
+            }
             return responseData;
         }
     };
