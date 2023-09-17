@@ -55,7 +55,3 @@ document.addEventListener("contextmenu", function(event) {
     window.open("https://hitokoto.cn/?uuid=" + Sentence.title);
   }
 });
-
-function SentenceOpen() {
-    Sentence()
-}
