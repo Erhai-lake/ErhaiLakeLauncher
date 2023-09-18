@@ -36,7 +36,7 @@ $Config = json_decode(file_get_contents($Name . "/config.json"), true);
 $ThemeColor = $Config["ThemeColor"];
 
 // 灰白
-if($Config["grayscale"]){
+if ($Config["grayscale"]) {
     $grayscale = '* {filter: grayscale(95%);-webkit-filter: grayscale(95%);-moz-filter: grayscale(95%);-ms-filter: grayscale(95%);-o-filter: grayscale(95%);}';
 }
 ?>
@@ -52,8 +52,7 @@ if($Config["grayscale"]){
     <link rel="stylesheet" href="css/icon.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
-        <?php echo $grayscale; ?>
-        .Main {
+        <?php echo $grayscale; ?>.Main {
             background: <?php echo $ThemeColor . '30'; ?>;
         }
 
