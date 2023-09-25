@@ -11,7 +11,7 @@ $ThemeColor = $Config["ThemeColor"];
 
 // 公共的KEY
 $KEY = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
-$CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, '', '', '', $_GET['index'], 40), true);
+$CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, '', $_GET['searchFilter'], '', $_GET['index'], 40), true);
 $Html = '';
 foreach ($CurseforgeModsSearch['data'] as $item1) {
     $Html .= '<div class="ListItem" onclick="ModID(\'' . $item1['id'] . '\')">';
@@ -19,7 +19,7 @@ foreach ($CurseforgeModsSearch['data'] as $item1) {
     $Html .= '<div class="Right"><div class="RightLeft">';
     $Html .= '<p class="ItemName">' . $item1['name'] . '</p>';
     $Html .= '<div class="ItemSummary">';
-    foreach ($CurseforgeModsSearch['latestFiles'] as $item2) {
+    foreach ($item1['categories'] as $item2) {
         $Html .= '<p class="Categories">' . $item2['name'] . '</p>';
     }
     $Html .= '<p class="Summary" title="' . $item1['summary'] . '">' . $item1['summary'] . '</p>
@@ -64,6 +64,28 @@ function downloadCount($number)
             color: <?php echo $ThemeColor; ?>;
         }
 
+        .ListContainer .ListContent .Item1 .NameInput input,
+        .ListContainer .ListContent .Item2 .VersionInput select,
+        .ListContainer .ListContent .Item1 .SourceSelect select,
+        .ListContainer .ListContent .Item2 .TypeSelect select {
+            border: <?php echo '2px solid ' . $ThemeColor; ?>;
+        }
+
+        .ListContainer .ListContent .Item1 .NameInput input:hover,
+        .ListContainer .ListContent .Item2 .VersionInput select:hover,
+        .ListContainer .ListContent .Item1 .SourceSelect select:hover,
+        .ListContainer .ListContent .Item2 .TypeSelect select:hover {
+            background: <?php echo $ThemeColor . 'a4'; ?>;
+        }
+
+        .ListContainer .ListContent .ButtonContainer button {
+            border: <?php echo '2px solid ' . $ThemeColor; ?>;
+        }
+
+        .ListContainer .ListContent .ButtonContainer button:hover {
+            background: <?php echo $ThemeColor . '6b'; ?>;
+        }
+
         .ListContainer .ListContent .ListItem {
             border: <?php echo '3px solid ' . $ThemeColor; ?>;
         }
@@ -80,8 +102,43 @@ function downloadCount($number)
 
 <body>
     <div class="ListContainer">
-        <div class="ListTitle">搜索模组</div>
+        <div class="ListTitle">搜索Mod</div>
         <div class="ListContent">
+            <div class="Item1">
+                <label class="NameInput">
+                    <span>名称</span>
+                    <input type="text" placeholder="请输入关键词" id="NameInput" value="<?php echo $_GET['searchFilter']; ?>">
+                </label>
+                <label class="SourceSelect">
+                    <span>来源</span>
+                    <select id="SourceSelect">
+                        <option value="全部">全部</option>
+                        <option value="CurseForge">CurseForge</option>
+                    </select>
+                </label>
+            </div>
+            <div class="Item2">
+                <label class="VersionInput">
+                    <span>版本</span>
+                    <select id="VersionInput">
+                        <option value="来源1">版本</option>
+                        <option value="来源2">来源2</option>
+                        <option value="来源3">来源3</option>
+                    </select>
+                </label>
+                <label class="TypeSelect">
+                    <span>类型</span>
+                    <select id="TypeSelect">
+                        <option value="来源1">全部</option>
+                        <option value="来源2">来源2</option>
+                        <option value="来源3">来源3</option>
+                    </select>
+                </label>
+            </div>
+            <div class="ButtonContainer">
+                <button class="SearchButton">搜索</button>
+                <button class="ResetButton">重置条件</button>
+            </div>
         </div>
     </div>
     <div class="ListContainer">
