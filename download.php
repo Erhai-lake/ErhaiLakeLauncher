@@ -40,7 +40,7 @@ $ThemeColor = $Config["ThemeColor"];
     <div class="Main">
         <div class="Left">
             <p class="Title">Minecraft</p>
-            <div class="Item Selected" onclick="Selected(event, 'AutomaticInstallation')">
+            <div class="Item Selected" onclick="Selected(event, 'AutomaticInstallation.php')">
                 <div class="texe">
                     <p><i class="icon icon-daima"></i>自动安装</p>
                 </div>
@@ -52,7 +52,7 @@ $ThemeColor = $Config["ThemeColor"];
                 </div>
             </div>
             <p class="Title">资源</p>
-            <div class="Item" onclick="Selected(event)">
+            <div class="Item" onclick="Selected(event, 'Mods.php?index=0')">
                 <div class="texe">
                     <p><i class="icon icon-pintu"></i>Mod</p>
                 </div>

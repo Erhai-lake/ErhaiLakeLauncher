@@ -59,7 +59,7 @@ function InitializeSource($Source = 0)
             return $sources[1];
         } else if ($fastestWebsite == $sources[2]["版本列表"]) {
             return $sources[2];
-        }else{
+        } else {
             return 3;
         }
     }
@@ -143,4 +143,25 @@ function AllVersions($VersionFile)
     } else {
         return 2;
     }
+}
+
+// Curseforge搜索模组
+// 参数:Key,分类ID,游戏版本,关键词,模组加载器,索引,数量(最大50)
+// 返回:结果
+function CurseforgeModsSearch($Key = '', $categoryId = 0, $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 50)
+{
+    $curl = curl_init();
+    $url = 'https://api.curseforge.com/v1/mods/search?gameId=432&sortField=2&sortOrder=1&' . 'categoryId=' . $categoryId . '&gameVersion=' . $gameVersion . '&searchFilter=' . $searchFilter . '&modLoaderType=' . $modLoaderType . '&index=' . ($pageSize * $index) . '&pageSize=' . $pageSize;
+    $headers = array(
+        'X-API-Key: ' . $Key,
+        'Accept: application/json'
+    );
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 50);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($curl);
+    curl_close($curl);
+    return $data;
 }

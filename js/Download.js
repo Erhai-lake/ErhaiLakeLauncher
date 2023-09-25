@@ -7,7 +7,7 @@ function Selected(event, type) {
     }
     let div = event.currentTarget;
     div.classList.add('Selected');
-    MainIframe.src = type + ".php";
+    MainIframe.src = type;
     SelectedDiv = div;
 }
 document.querySelector('.Selected').click();

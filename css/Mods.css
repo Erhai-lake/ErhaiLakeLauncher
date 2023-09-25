@@ -1,0 +1,175 @@
+.ListContainer {
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffffa0;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.ListContainer:hover {
+    box-shadow: #80CEFF 0px 0px 0px 3px;
+}
+
+.ListContainer:hover .ListTitle {
+    color: #80CEFF;
+    transition: all 0.2s;
+}
+
+.ListContainer .ListTitle {
+    width: 100%;
+    padding: 10px 0;
+    font-style: 1.3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ListContainer .ListContent {
+    padding: 10px;
+}
+
+.ListContainer .ListContent .ListItem {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-style: 1.3em;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    transition: all 0.2s;
+    border: 3px solid #80CEFF;
+}
+
+.ListContainer .ListContent .ListItem:hover {
+    background: #80ceff72;
+}
+
+.ListContainer .ListContent .ListItem .Left {
+    min-width: 46px;
+    width: 46px;
+    height: 46px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 5px solid #80CEFF;
+}
+
+.ListContainer .ListContent .ListItem .Right {
+    position: relative;
+    width: 100%;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft {
+    position: absolute;
+    top: 0;
+    width: 80%;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemName {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemSummary {
+    display: flex;
+    font-size: 14px;
+    color: #949494;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemSummary .Categories {
+    white-space: nowrap;
+    margin-right: 5px;
+    padding: 0 5px;
+    background: #cccccc88;
+    border-radius: 5px;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemSummary .Summary {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemElse {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #949494;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightLeft .ItemElse i {
+    margin-right: 3px;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight {
+    position: absolute;
+    right: 0;
+    line-height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.ListContainer .ListContent .ListItem:hover .RightRight {
+    opacity: 1;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i {
+    transition: all 0.2s;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i:hover {
+    color: #80ceff;
+}
+
+.ListContainer .ListContent .ListItem .Right .RightRight i:active {
+    transform: scale(90%);
+}
+
+.ListContainer .ListContent .Index {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ListContainer .ListContent .Index div {
+    margin: 0 15px;
+    padding: 3px 15px;
+    color: #80CEFF;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.ListContainer .ListContent .Index div:hover {
+    color: #fff;
+    background: #80CEFF;
+}
+
+.ListContainer .ListContent .Index .Left:hover {
+    transform: translateX(-5px) scale(1.0);
+}
+
+.ListContainer .ListContent .Index .Left:active {
+    transform: translateX(-5px) scale(0.9);
+}
+
+.ListContainer .ListContent .Index .Right:hover {
+    transform: translateX(5px) scale(1.0);
+}
+
+.ListContainer .ListContent .Index .Right:active {
+    transform: translateX(5px) scale(0.9);
+}

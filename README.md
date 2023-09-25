@@ -20,6 +20,7 @@
 - 支持全局灰度配色
 - 获取 Minecraft 版本信息
 - 自动拼接 Minecraft 版本 Wiki
+- 模组检索
 
 ## 贡献
 
