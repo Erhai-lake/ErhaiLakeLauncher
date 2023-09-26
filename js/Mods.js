@@ -12,6 +12,7 @@ const Mods = document.querySelector("body > div:nth-child(3)");
 const searchFilter = document.getElementById('NameInput');
 const SourceSelect = document.getElementById('SourceSelect');
 const gameVersion = document.getElementById('VersionInput');
+const categoryId = document.getElementById('TypeSelect');
 
 // 上一页
 Left.addEventListener('click', function () {
@@ -19,7 +20,7 @@ Left.addEventListener('click', function () {
     if (!isNaN(numValue) && numValue !== 0) {
         Search.style.display = 'block';
         Mods.style.display = 'none';
-        window.location.href = '/Mods.php?index=' + (numValue - 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value;
+        window.location.href = '/Mods.php?index=' + (numValue - 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value + "&categoryId=" + categoryId.value;
     }
 })
 
@@ -29,7 +30,7 @@ Right.addEventListener('click', function () {
     if (!isNaN(numValue)) {
         Search.style.display = 'block';
         Mods.style.display = 'none';
-        window.location.href = 'Mods.php?index=' + (numValue + 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value;
+        window.location.href = 'Mods.php?index=' + (numValue + 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value + "&categoryId=" + categoryId.value;
     }
 })
 
@@ -40,14 +41,29 @@ const ResetButton = document.querySelector("body > div:nth-child(1) > div.ListCo
 SearchButton.addEventListener('click', function () {
     Search.style.display = 'block';
     Mods.style.display = 'none';
-    window.location.href = 'Mods.php?index=0&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value;
+    window.location.href = 'Mods.php?index=0&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value + "&gameVersion=" + gameVersion.value + "&categoryId=" + categoryId.value;
 })
+
+// 回车事件
+searchFilter.addEventListener('keydown', function (event) {
+    if (event.key === 13) {
+        SearchButton.click();
+    }
+});
+
+// 处理回车事件的函数示例
+function handleEnterKey() {
+    const inputValue = inputElement.value;
+    // 在这里执行你的操作，可以是提交表单、搜索等等
+    console.log('回车键被按下，输入的内容是: ' + inputValue);
+}
 
 // 重置条件
 ResetButton.addEventListener('click', function () {
     searchFilter.value = '';
     SourceSelect.selectedIndex = 0;
     gameVersion.value = '全部'
+    categoryId.selectedIndex = 0;
 });
 
 // 获取滚动条位置
