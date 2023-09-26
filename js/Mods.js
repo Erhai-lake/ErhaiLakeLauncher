@@ -9,25 +9,27 @@ const Num = document.querySelector('.Num')
 const SearchButton = document.querySelector("body > div:nth-child(1) > div.ListContent > div.ButtonContainer > button.SearchButton");
 const ResetButton = document.querySelector("body > div:nth-child(1) > div.ListContent > div.ButtonContainer > button.ResetButton");
 let searchFilter = document.getElementById('NameInput');
+let SourceSelect = document.getElementById('SourceSelect');
 
 Left.addEventListener('click', function () {
     const numValue = parseInt(Num.textContent, 10);
     if (!isNaN(numValue) && numValue !== 0) {
-        window.location.href = '/Mods.php?index=' + (numValue - 1) + '&searchFilter=' + searchFilter.value;
+        window.location.href = '/Mods.php?index=' + (numValue - 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value;
     }
 })
 
 Right.addEventListener('click', function () {
     const numValue = parseInt(Num.textContent, 10);
     if (!isNaN(numValue)) {
-        window.location.href = 'Mods.php?index=' + (numValue + 1) + '&searchFilter=' + searchFilter.value;
+        window.location.href = 'Mods.php?index=' + (numValue + 1) + '&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value;
     }
 })
 
 SearchButton.addEventListener('click', function () {
-    window.location.href = 'Mods.php?index=0&searchFilter=' + searchFilter.value;
+    window.location.href = 'Mods.php?index=0&searchFilter=' + searchFilter.value + '&SourceSelect=' + SourceSelect.value;
 })
 
 ResetButton.addEventListener('click', function () {
-
-})
+    searchFilter.value = '';
+    SourceSelect.selectedIndex = 0;
+});

@@ -54,7 +54,7 @@
 .ListContainer .ListContent .Item2 .VersionInput select,
 .ListContainer .ListContent .Item1 .SourceSelect select,
 .ListContainer .ListContent .Item2 .TypeSelect select {
-    width: 80%;
+    width: 70%;
     padding: 5px 5px;
     box-sizing: border-box;
     background: transparent;

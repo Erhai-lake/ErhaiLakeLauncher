@@ -9,27 +9,49 @@ $Config = json_decode(file_get_contents($Name . "/config.json"), true);
 // 主题色
 $ThemeColor = $Config["ThemeColor"];
 
-// 公共的KEY
-$KEY = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
-$CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, '', $_GET['searchFilter'], '', $_GET['index'], 40), true);
-$Html = '';
-foreach ($CurseforgeModsSearch['data'] as $item1) {
-    $Html .= '<div class="ListItem" onclick="ModID(\'' . $item1['id'] . '\')">';
-    $Html .= '<div class="Left" style="background: url(\'' . $item1['logo']['url'] . '\') no-repeat 100% 100%/100% 100%;"></div>';
-    $Html .= '<div class="Right"><div class="RightLeft">';
-    $Html .= '<p class="ItemName">' . $item1['name'] . '</p>';
-    $Html .= '<div class="ItemSummary">';
-    foreach ($item1['categories'] as $item2) {
-        $Html .= '<p class="Categories">' . $item2['name'] . '</p>';
+if (isset($_GET['SourceSelect'])) {
+    if ($_GET['SourceSelect'] == 'Modrinth') {
+        $select1 = 'selected';
+    } else {
+        $Html = CurseForge();
+        $select2 = 'selected';
     }
-    $Html .= '<p class="Summary" title="' . $item1['summary'] . '">' . $item1['summary'] . '</p>
+} else {
+    $Html = CurseForge();
+    $select2 = 'selected';
+}
+
+
+function CurseForge()
+{
+    // 公共的KEY
+    $KEY = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
+    if (isset($_GET['searchFilter'])) {
+        $searchFilter = $_GET['searchFilter'];
+    } else {
+        $searchFilter = '';
+    }
+    $CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, '', $searchFilter, '', $_GET['index'], 40), true);
+    $Html = '';
+    foreach ($CurseforgeModsSearch['data'] as $item1) {
+        $Html .= '<div class="ListItem" onclick="ModID(\'' . $item1['id'] . '\')">';
+        $Html .= '<div class="Left" style="background: url(\'' . $item1['logo']['url'] . '\') no-repeat 100% 100%/100% 100%;"></div>';
+        $Html .= '<div class="Right"><div class="RightLeft">';
+        $Html .= '<p class="ItemName">' . $item1['name'] . '</p>';
+        $Html .= '<div class="ItemSummary">';
+        foreach ($item1['categories'] as $item2) {
+            $Html .= '<p class="Categories">' . $item2['name'] . '</p>';
+        }
+        $Html .= '<p class="Summary" title="' . $item1['summary'] . '">' . $item1['summary'] . '</p>
     </div><div class="ItemElse">';
-    $Html .= '<p><i class="icon icon-xiazaidaoru"></i>' . downloadCount($item1['downloadCount']) . '</p>';
-    $Html .= '<p><i class="icon icon-anquan"></i>' . date('Y-m-d H:i:s', strtotime($item1['dateModified'])) . '</p>';
-    $Html .= '<p><i class="icon icon-huojian"></i>curseforge</p>';
-    $Html .= '</div></div><div class="RightRight">';
-    $Html .= '<i class="icon icon-tishi" title="curseforge" onclick="window.open(\'' . $item1['links']['websiteUrl'] . '\'); event.stopPropagation();"></i>';
-    $Html .= '</div></div></div>';
+        $Html .= '<p><i class="icon icon-xiazaidaoru"></i>' . downloadCount($item1['downloadCount']) . '</p>';
+        $Html .= '<p><i class="icon icon-anquan"></i>' . date('Y-m-d H:i:s', strtotime($item1['dateModified'])) . '</p>';
+        $Html .= '<p><i class="icon icon-huojian"></i>curseforge</p>';
+        $Html .= '</div></div><div class="RightRight">';
+        $Html .= '<i class="icon icon-tishi" title="curseforge" onclick="window.open(\'' . $item1['links']['websiteUrl'] . '\'); event.stopPropagation();"></i>';
+        $Html .= '</div></div></div>';
+    }
+    return $Html;
 }
 
 // 下载量单位换算
@@ -111,9 +133,9 @@ function downloadCount($number)
                 </label>
                 <label class="SourceSelect">
                     <span>来源</span>
-                    <select id="SourceSelect">
-                        <option value="全部">全部</option>
-                        <option value="CurseForge">CurseForge</option>
+                    <select id="SourceSelect" value="<?php echo $_GET['SourceSelect']; ?>">
+                        <option value="CurseForge" <?php echo $select2; ?>>CurseForge</option>
+                        <option value="Modrinth" <?php echo $select1; ?>>Modrinth</option>
                     </select>
                 </label>
             </div>
