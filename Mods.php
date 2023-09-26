@@ -39,8 +39,12 @@ function CurseForge()
         $Html .= '<div class="Right"><div class="RightLeft">';
         $Html .= '<p class="ItemName">' . $item1['name'] . '</p>';
         $Html .= '<div class="ItemSummary">';
+        $item2Num = 0;
         foreach ($item1['categories'] as $item2) {
-            $Html .= '<p class="Categories">' . $item2['name'] . '</p>';
+            if ($item2Num != 4) {
+                $item2Num++;
+                $Html .= '<p class="Categories">' . $item2['name'] . '</p>';
+            }
         }
         $Html .= '<p class="Summary" title="' . $item1['summary'] . '">' . $item1['summary'] . '</p>
     </div><div class="ItemElse">';
