@@ -20,7 +20,7 @@ function addNotification(type, message) {
     notification.textContent = message;
     // 添加点击事件，点击时移除通知
     notification.addEventListener("click", function () {
-        removeNotification(notification);
+        notification.style.display = 'none';
     });
     // 添加通知到容器，并设置定时器自动移除
     notificationContainer.appendChild(notification);
