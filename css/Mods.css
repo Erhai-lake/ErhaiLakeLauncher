@@ -51,7 +51,7 @@
 }
 
 .ListContainer .ListContent .Item1 .NameInput input,
-.ListContainer .ListContent .Item2 .VersionInput select,
+.ListContainer .ListContent .Item2 .VersionInput input,
 .ListContainer .ListContent .Item1 .SourceSelect select,
 .ListContainer .ListContent .Item2 .TypeSelect select {
     width: 70%;
@@ -64,7 +64,7 @@
 }
 
 .ListContainer .ListContent .Item1 .NameInput input:hover,
-.ListContainer .ListContent .Item2 .VersionInput select:hover,
+.ListContainer .ListContent .Item2 .VersionInput input:hover,
 .ListContainer .ListContent .Item1 .SourceSelect select:hover,
 .ListContainer .ListContent .Item2 .TypeSelect select:hover {
     background: #80ceffa4;
@@ -73,25 +73,39 @@
 .ListContainer .ListContent .ButtonContainer {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .ListContainer .ListContent .ButtonContainer button {
     margin: 0 20px;
-    padding: 10px 30px;
     border-radius: 5px;
     background: transparent;
-    border: 2px solid #80CEFF;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
-.ListContainer .ListContent .ButtonContainer button:hover{
+.ListContainer .ListContent .ButtonContainer .SearchButton {
+    padding: 10px 100px;
+    border: 2px solid #80CEFF;
+}
+
+.ListContainer .ListContent .ButtonContainer .SearchButton:hover {
     background: #80ceff6b;
 }
 
-.ListContainer .ListContent .ButtonContainer button:active{
+
+.ListContainer .ListContent .ButtonContainer .ResetButton {
+    padding: 10px 85px;
+    border: 2px solid #ff5c5c;
+}
+
+.ListContainer .ListContent .ButtonContainer .ResetButton:hover {
+    background: #ff5c5c6b;
+}
+
+.ListContainer .ListContent .ButtonContainer button:active {
     transform: scale(0.9);
 }
 
@@ -237,4 +251,49 @@
 
 .ListContainer .ListContent .Index .Right:active {
     transform: translateX(5px) scale(0.9);
+}
+
+.ListContainer .Search {
+    animation: moveAnimation 1s linear infinite alternate;
+}
+
+@keyframes moveAnimation {
+    0% {
+        transform: translateX(-10%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(10%);
+    }
+}
+
+.Top {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    width: 46px;
+    height: 46px;
+    background: #80CEFF;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.Top a {
+    width: 100%;
+    text-align: center;
+    line-height: 46px;
+    color: #000;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.Top a:active .Top {
+    transform: scale(0.9);
 }

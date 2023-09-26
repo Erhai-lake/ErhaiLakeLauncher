@@ -299,7 +299,7 @@ if ($Name == "") {
 			// 鼠标缩放(滚轮)
 			skinViewer.controls.enableZoom = true
 			// 鼠标平移(右键)
-			skinViewer.controls.enablePan = false
+			skinViewer.controls.enablePan = true
 			for (const part of skinParts) {
 				for (const layer of skinLayers) {
 					skinViewer.playerObject.skin[part][layer].visible =

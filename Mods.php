@@ -13,10 +13,28 @@ if (isset($_GET['SourceSelect'])) {
     if ($_GET['SourceSelect'] == 'Modrinth') {
         $select1 = 'selected';
     } else {
+        if (isset($_GET['gameVersion'])) {
+            if ($_GET['gameVersion'] == '全部') {
+                $gameVersion = '全部';
+            } else {
+                $gameVersion = $_GET['gameVersion'];
+            }
+        } else {
+            $gameVersion = '全部';
+        }
         $Html = CurseForge();
         $select2 = 'selected';
     }
 } else {
+    if (isset($_GET['gameVersion'])) {
+        if ($_GET['gameVersion'] == '全部') {
+            $gameVersion = '全部';
+        } else {
+            $gameVersion = $_GET['gameVersion'];
+        }
+    } else {
+        $gameVersion = '全部';
+    }
     $Html = CurseForge();
     $select2 = 'selected';
 }
@@ -26,12 +44,21 @@ function CurseForge()
 {
     // 公共的KEY
     $KEY = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
+    if (isset($_GET['gameVersion'])) {
+        if ($_GET['gameVersion'] == '全部') {
+            $gameVersion = '';
+        } else {
+            $gameVersion = $_GET['gameVersion'];
+        }
+    } else {
+        $gameVersion = '';
+    }
     if (isset($_GET['searchFilter'])) {
         $searchFilter = $_GET['searchFilter'];
     } else {
         $searchFilter = '';
     }
-    $CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, '', $searchFilter, '', $_GET['index'], 40), true);
+    $CurseforgeModsSearch = json_decode(CurseforgeModsSearch($KEY, 0, $gameVersion, $searchFilter, '', $_GET['index'], 50), true);
     $Html = '';
     foreach ($CurseforgeModsSearch['data'] as $item1) {
         $Html .= '<div class="ListItem" onclick="ModID(\'' . $item1['id'] . '\')">';
@@ -91,14 +118,14 @@ function downloadCount($number)
         }
 
         .ListContainer .ListContent .Item1 .NameInput input,
-        .ListContainer .ListContent .Item2 .VersionInput select,
+        .ListContainer .ListContent .Item2 .VersionInput input,
         .ListContainer .ListContent .Item1 .SourceSelect select,
         .ListContainer .ListContent .Item2 .TypeSelect select {
             border: <?php echo '2px solid ' . $ThemeColor; ?>;
         }
 
         .ListContainer .ListContent .Item1 .NameInput input:hover,
-        .ListContainer .ListContent .Item2 .VersionInput select:hover,
+        .ListContainer .ListContent .Item2 .VersionInput input:hover,
         .ListContainer .ListContent .Item1 .SourceSelect select:hover,
         .ListContainer .ListContent .Item2 .TypeSelect select:hover {
             background: <?php echo $ThemeColor . 'a4'; ?>;
@@ -127,7 +154,7 @@ function downloadCount($number)
 </head>
 
 <body>
-    <div class="ListContainer">
+    <div class="ListContainer" name="Top">
         <div class="ListTitle">搜索Mod</div>
         <div class="ListContent">
             <div class="Item1">
@@ -146,11 +173,25 @@ function downloadCount($number)
             <div class="Item2">
                 <label class="VersionInput">
                     <span>版本</span>
-                    <select id="VersionInput">
-                        <option value="来源1">版本</option>
-                        <option value="来源2">来源2</option>
-                        <option value="来源3">来源3</option>
-                    </select>
+                    <input type="text" list="sourceList" id="VersionInput" value="<?php echo $gameVersion; ?>">
+                    <datalist id="sourceList">
+                        <option value="全部">可以自行输入</option>
+                        <option value="1.20.1">1.20.1</option>
+                        <option value="1.20">1.20</option>
+                        <option value="1.19.4">1.19.4</option>
+                        <option value="1.18.2">1.18.2</option>
+                        <option value="1.17.1">1.17.1</option>
+                        <option value="1.16.5">1.16.5</option>
+                        <option value="1.15.2">1.15.2</option>
+                        <option value="1.14.4">1.14.4</option>
+                        <option value="1.13.2">1.13.2</option>
+                        <option value="1.12.2">1.12.2</option>
+                        <option value="1.11.2">1.11.2</option>
+                        <option value="1.10.2">1.10.2</option>
+                        <option value="1.9.4">1.9.4</option>
+                        <option value="1.8.9">1.8.9</option>
+                        <option value="1.7.10">1.7.10</option>
+                    </datalist>
                 </label>
                 <label class="TypeSelect">
                     <span>类型</span>
@@ -167,8 +208,18 @@ function downloadCount($number)
             </div>
         </div>
     </div>
+    <div class="ListContainer" style="display: none;">
+        <div class="ListContent">
+            <div class="ListTitle Search">正在检索</div>
+        </div>
+    </div>
     <div class="ListContainer">
         <div class="ListContent">
+            <div class="Index">
+                <div class="Left">&lt;</div>
+                <p class="Num"><?php echo $_GET['index']; ?></p>
+                <div class="Right">&gt;</div>
+            </div>
             <?php echo $Html; ?>
             <div class="Index">
                 <div class="Left">&lt;</div>
@@ -177,6 +228,7 @@ function downloadCount($number)
             </div>
         </div>
     </div>
+    <div class="Top" style="display: none;"><a href="#Top">↑</a></div>
     <script src="js/Mods.js"></script>
     <script src="js/Main.js"></script>
 </body>

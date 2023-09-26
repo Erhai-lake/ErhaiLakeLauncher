@@ -10,6 +10,10 @@
     font-family: "GenshinImpact";
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     height: 100vh;
     font-style: 16px;
