@@ -52,7 +52,7 @@ $ThemeColor = $Config["ThemeColor"];
                 </div>
             </div>
             <p class="Title">资源</p>
-            <div class="Item" onclick="Selected(event, 'Mods.php?index=0&SourceSelect=CurseForge')">
+            <div class="Item" onclick="Selected(event, 'Mods.php?index=0&SourceSelect=CurseForge&modLoaderType=')">
                 <div class="texe">
                     <p><i class="icon icon-pintu"></i>Mod</p>
                 </div>

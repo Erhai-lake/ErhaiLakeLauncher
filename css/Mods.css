@@ -30,82 +30,93 @@
     padding: 10px 50px;
 }
 
-.ListContainer .ListContent .Item1,
-.ListContainer .ListContent .Item2 {
+.ListContainer .ListContent .SearchMain {
+    display: flex;
+    align-items: center;
+}
+
+.ListContainer .ListContent .SearchMain span {
+    margin: 0 10px;
+}
+
+.ListContainer .ListContent .SearchMain .SearchLeft {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.ListContainer .ListContent .SearchMain .SearchLeft .SearchTop {
     width: 100%;
-    margin: 10px 0;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    white-space: nowrap;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
-.ListContainer .ListContent .Item1 .NameInput,
-.ListContainer .ListContent .Item2 .VersionInput {
-    width: 70%;
+.ListContainer .ListContent .SearchMain .SearchRight {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.ListContainer .ListContent .Item1 .SourceSelect,
-.ListContainer .ListContent .Item2 .TypeSelect {
-    width: 30%;
-}
-
-.ListContainer .ListContent .Item1 .NameInput input,
-.ListContainer .ListContent .Item2 .VersionInput input,
-.ListContainer .ListContent .Item1 .SourceSelect select,
-.ListContainer .ListContent .Item2 .TypeSelect select {
-    width: 70%;
-    padding: 5px 5px;
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid #80CEFF;
-    border-radius: 5px;
-    transition: all 0.2s;
-}
-
-.ListContainer .ListContent .Item1 .NameInput input:hover,
-.ListContainer .ListContent .Item2 .VersionInput input:hover,
-.ListContainer .ListContent .Item1 .SourceSelect select:hover,
-.ListContainer .ListContent .Item2 .TypeSelect select:hover {
-    background: #80ceffa4;
-}
-
-.ListContainer .ListContent .ButtonContainer {
+.ListContainer .ListContent .SearchMain .SearchLeft .SearchBottom {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
-.ListContainer .ListContent .ButtonContainer button {
-    margin: 0 20px;
-    border-radius: 5px;
+.ListContainer .ListContent .SearchMain .SearchLeft .NameInput input,
+.ListContainer .ListContent .SearchMain .SearchLeft .SourceSelect select,
+.ListContainer .ListContent .SearchMain .SearchLeft .TypeSelect select,
+.ListContainer .ListContent .SearchMain .SearchLeft .VersionInput input,
+.ListContainer .ListContent .SearchMain .SearchLeft .LoaderSelect select {
+    width: 150px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    text-align: center;
     background: transparent;
-    font-size: 16px;
-    cursor: pointer;
+    border: 2px solid #80CEFF;
+    border-radius: 5px;
     transition: all 0.2s;
 }
 
-.ListContainer .ListContent .ButtonContainer .SearchButton {
-    padding: 10px 100px;
+.ListContainer .ListContent .SearchMain .SearchLeft .NameInput input:hover,
+.ListContainer .ListContent .SearchMain .SearchLeft .SourceSelect select:hover,
+.ListContainer .ListContent .SearchMain .SearchLeft .TypeSelect select:hover,
+.ListContainer .ListContent .SearchMain .SearchLeft .VersionInput input:hover,
+.ListContainer .ListContent .SearchMain .SearchLeft .LoaderSelect select:hover {
+    background: #80ceffa4;
+}
+
+.ListContainer .ListContent .SearchMain .SearchRight button {
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    margin: 3px 0;
+    padding: 10px 30px;
+    transition: all 0.2s;
+}
+
+.ListContainer .ListContent .SearchMain .SearchRight .SearchButton {
     border: 2px solid #80CEFF;
 }
 
-.ListContainer .ListContent .ButtonContainer .SearchButton:hover {
+.ListContainer .ListContent .SearchMain .SearchRight .SearchButton:hover {
     background: #80ceff6b;
 }
 
 
-.ListContainer .ListContent .ButtonContainer .ResetButton {
-    padding: 10px 85px;
+.ListContainer .ListContent .SearchMain .SearchRight .ResetButton {
     border: 2px solid #ff5c5c;
 }
 
-.ListContainer .ListContent .ButtonContainer .ResetButton:hover {
+.ListContainer .ListContent .SearchMain .SearchRight .ResetButton:hover {
     background: #ff5c5c6b;
 }
 
-.ListContainer .ListContent .ButtonContainer button:active {
+.ListContainer .ListContent .SearchMain .SearchRight button:active {
     transform: scale(0.9);
 }
 
@@ -253,25 +264,15 @@
     transform: translateX(5px) scale(0.9);
 }
 
-.ListContainer .Search {
-    animation: moveAnimation 1s linear infinite alternate;
+.ListContainer .ModsLoading {
+    width: 455px;
+    height: 455px;
+    margin: 0 auto;
+    background: url('/img/ModsLoading.gif') 100% 100%/100% 100% no-repeat;
+    border-radius: 20px;
 }
 
-@keyframes moveAnimation {
-    0% {
-        transform: translateX(-10%);
-    }
-
-    50% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(10%);
-    }
-}
-
-.Top {
+#BackTo {
     position: fixed;
     right: 20px;
     bottom: 15px;
@@ -285,7 +286,7 @@
     transition: all 0.2s;
 }
 
-.Top a {
+#BackTo a {
     width: 100%;
     text-align: center;
     line-height: 46px;
@@ -294,6 +295,6 @@
     text-decoration: none;
 }
 
-.Top a:active .Top {
+#BackTo a:active .Top {
     transform: scale(0.9);
 }

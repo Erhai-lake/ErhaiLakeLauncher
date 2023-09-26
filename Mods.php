@@ -13,6 +13,7 @@ $ThemeColor = $Config["ThemeColor"];
 if (isset($_GET['SourceSelect'])) {
     if ($_GET['SourceSelect'] == 'Modrinth') {
         $select1 = 'selected';
+        $Html = '<div class="ListTitle">别催啦!!!在研究文档啊!!!</div>';
     } else {
         $select2 = 'selected';
 
@@ -72,7 +73,7 @@ if (isset($_GET['SourceSelect'])) {
                     $categoryIdHtml16 = 'selected';
                     break;
                 case '4475':
-                    $categoryIdHtml17= 'selected';
+                    $categoryIdHtml17 = 'selected';
                     break;
                 case '424':
                     $categoryIdHtml18 = 'selected';
@@ -121,7 +122,26 @@ if (isset($_GET['SourceSelect'])) {
         } else {
             $searchFilter = '';
         }
-        $Html = CurseForge(json_decode(CurseforgeModsSearch($CurseForgeKey, $categoryId, $gameVersion, $searchFilter, '', $_GET['index'], 50), true));
+
+        // mod加载器检索
+        if (isset($_GET['modLoaderType'])) {
+            $modLoaderType = $_GET['modLoaderType'];
+            switch ($_GET['modLoaderType']) {
+                case '1':
+                    $modLoaderTypeHtml2 = 'selected';
+                    break;
+                case '4':
+                    $modLoaderTypeHtml3 = 'selected';
+                    break;
+                case '5':
+                    $modLoaderTypeHtml4 = 'selected';
+                    break;
+            }
+        } else {
+            $modLoaderType = '0';
+            $modLoaderTypeHtml1 = 'selected';
+        }
+        $Html = CurseForge(json_decode(CurseforgeModsSearch($CurseForgeKey, $categoryId, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
     }
 }
 
@@ -211,25 +231,27 @@ function downloadCount($number)
             color: <?php echo $ThemeColor; ?>;
         }
 
-        .ListContainer .ListContent .Item1 .NameInput input,
-        .ListContainer .ListContent .Item2 .VersionInput input,
-        .ListContainer .ListContent .Item1 .SourceSelect select,
-        .ListContainer .ListContent .Item2 .TypeSelect select {
+        .ListContainer .ListContent .SearchMain .SearchLeft .NameInput input,
+        .ListContainer .ListContent .SearchMain .SearchLeft .SourceSelect select,
+        .ListContainer .ListContent .SearchMain .SearchLeft .TypeSelect select,
+        .ListContainer .ListContent .SearchMain .SearchLeft .VersionInput input,
+        .ListContainer .ListContent .SearchMain .SearchLeft .LoaderSelect select {
             border: <?php echo '2px solid ' . $ThemeColor; ?>;
         }
 
-        .ListContainer .ListContent .Item1 .NameInput input:hover,
-        .ListContainer .ListContent .Item2 .VersionInput input:hover,
-        .ListContainer .ListContent .Item1 .SourceSelect select:hover,
-        .ListContainer .ListContent .Item2 .TypeSelect select:hover {
+        .ListContainer .ListContent .SearchMain .SearchLeft .NameInput input:hover,
+        .ListContainer .ListContent .SearchMain .SearchLeft .SourceSelect select:hover,
+        .ListContainer .ListContent .SearchMain .SearchLeft .TypeSelect select:hover,
+        .ListContainer .ListContent .SearchMain .SearchLeft .VersionInput input:hover,
+        .ListContainer .ListContent .SearchMain .SearchLeft .LoaderSelect select:hover {
             background: <?php echo $ThemeColor . 'a4'; ?>;
         }
 
-        .ListContainer .ListContent .ButtonContainer button {
+        .ListContainer .ListContent .SearchMain .SearchRight .SearchButton {
             border: <?php echo '2px solid ' . $ThemeColor; ?>;
         }
 
-        .ListContainer .ListContent .ButtonContainer button:hover {
+        .ListContainer .ListContent .SearchMain .SearchRight .SearchButton:hover {
             background: <?php echo $ThemeColor . '6b'; ?>;
         }
 
@@ -244,6 +266,22 @@ function downloadCount($number)
         .ListContainer .ListContent .ListItem .Left {
             border: <?php echo '5px solid ' . $ThemeColor; ?>;
         }
+
+        .ListContainer .ListContent .ListItem .Right .RightRight i:hover {
+            color: <?php echo $ThemeColor; ?>;
+        }
+
+        .ListContainer .ListContent .Index div {
+            color: <?php echo $ThemeColor; ?>;
+        }
+
+        .ListContainer .ListContent .Index div:hover {
+            background: <?php echo $ThemeColor; ?>;
+        }
+
+        #BackTo {
+            background: <?php echo $ThemeColor; ?>;
+        }
     </style>
 </head>
 
@@ -251,99 +289,111 @@ function downloadCount($number)
     <div class="ListContainer" name="Top">
         <div class="ListTitle">搜索Mod</div>
         <div class="ListContent">
-            <div class="Item1">
-                <label class="NameInput">
-                    <span>名称</span>
-                    <input type="text" placeholder="请输入关键词" id="NameInput" value="<?php echo $_GET['searchFilter']; ?>">
-                </label>
-                <label class="SourceSelect">
-                    <span>来源</span>
-                    <select id="SourceSelect" value="<?php echo $_GET['SourceSelect']; ?>">
-                        <option value="CurseForge" <?php echo $select2; ?>>CurseForge</option>
-                        <option value="Modrinth" <?php echo $select1; ?>>Modrinth</option>
-                    </select>
-                </label>
-            </div>
-            <div class="Item2">
-                <label class="VersionInput">
-                    <span>版本</span>
-                    <input type="text" list="sourceList" id="VersionInput" value="<?php echo $gameVersionHtml; ?>">
-                    <datalist id="sourceList">
-                        <option value="全部">可以自行输入</option>
-                        <option value="1.20.1">1.20.1</option>
-                        <option value="1.20">1.20</option>
-                        <option value="1.19.4">1.19.4</option>
-                        <option value="1.18.2">1.18.2</option>
-                        <option value="1.17.1">1.17.1</option>
-                        <option value="1.16.5">1.16.5</option>
-                        <option value="1.15.2">1.15.2</option>
-                        <option value="1.14.4">1.14.4</option>
-                        <option value="1.13.2">1.13.2</option>
-                        <option value="1.12.2">1.12.2</option>
-                        <option value="1.11.2">1.11.2</option>
-                        <option value="1.10.2">1.10.2</option>
-                        <option value="1.9.4">1.9.4</option>
-                        <option value="1.8.9">1.8.9</option>
-                        <option value="1.7.10">1.7.10</option>
-                    </datalist>
-                </label>
-                <label class="TypeSelect">
-                    <span>类型</span>
-                    <select id="TypeSelect">
-                        <option value="0" <?php echo $categoryIdHtml1; ?>>全部</option>
-                        <option value="406" <?php echo $categoryIdHtml2; ?>>世界元素</option>
-                        <option value="410" <?php echo $categoryIdHtml3; ?>>维度</option>
-                        <option value="408" <?php echo $categoryIdHtml4; ?>>矿石/资源</option>
-                        <option value="409" <?php echo $categoryIdHtml5; ?>>天然结构</option>
-                        <option value="412" <?php echo $categoryIdHtml6; ?>>科技</option>
-                        <option value="415" <?php echo $categoryIdHtml7; ?>>管道/物流</option>
-                        <option value="4843" <?php echo $categoryIdHtml8; ?>>自动化</option>
-                        <option value="417" <?php echo $categoryIdHtml9; ?>>能源</option>
-                        <option value="4558" <?php echo $categoryIdHtml10; ?>>红石</option>
-                        <option value="436" <?php echo $categoryIdHtml11; ?>>食物/烹饪</option>
-                        <option value="416" <?php echo $categoryIdHtml12; ?>>农业</option>
-                        <option value="411" <?php echo $categoryIdHtml13; ?>>游戏机制</option>
-                        <option value="414" <?php echo $categoryIdHtml14; ?>>运输</option>
-                        <option value="420" <?php echo $categoryIdHtml15; ?>>仓储</option>
-                        <option value="4473" <?php echo $categoryIdHtml16; ?>>魔法</option>
-                        <option value="4475" <?php echo $categoryIdHtml17; ?>>冒险</option>
-                        <option value="424" <?php echo $categoryIdHtml18; ?>>装饰</option>
-                        <option value="434" <?php echo $categoryIdHtml19; ?>>装备/工具</option>
-                        <option value="133" <?php echo $categoryIdHtml20; ?>>性能优化</option>
-                        <option value="423" <?php echo $categoryIdHtml21; ?>>信息显示</option>
-                        <option value="435" <?php echo $categoryIdHtml22; ?>>服务器</option>
-                        <option value="5191" <?php echo $categoryIdHtml23; ?>>改良</option>
-                        <option value="421" <?php echo $categoryIdHtml24; ?>>支持库</option>
-                    </select>
-                </label>
-            </div>
-            <div class="ButtonContainer">
-                <button class="SearchButton">搜索</button>
-                <button class="ResetButton">重置条件</button>
+            <div class="SearchMain">
+                <div class="SearchLeft">
+                    <div class="SearchTop">
+                        <label class="NameInput">
+                            <span>名称</span>
+                            <input type="text" placeholder="请输入关键词" id="NameInput" value="<?php echo $_GET['searchFilter']; ?>">
+                        </label>
+                        <label class="SourceSelect">
+                            <span>来源</span>
+                            <select id="SourceSelect">
+                                <option value="CurseForge" <?php echo $select2; ?>>CurseForge</option>
+                                <option value="Modrinth" <?php echo $select1; ?>>Modrinth</option>
+                            </select>
+                        </label>
+                        <label class="TypeSelect">
+                            <span>类型</span>
+                            <select id="TypeSelect">
+                                <option value="0" <?php echo $categoryIdHtml1; ?>>全部</option>
+                                <option value="406" <?php echo $categoryIdHtml2; ?>>世界元素</option>
+                                <option value="410" <?php echo $categoryIdHtml3; ?>>维度</option>
+                                <option value="408" <?php echo $categoryIdHtml4; ?>>矿石/资源</option>
+                                <option value="409" <?php echo $categoryIdHtml5; ?>>天然结构</option>
+                                <option value="412" <?php echo $categoryIdHtml6; ?>>科技</option>
+                                <option value="415" <?php echo $categoryIdHtml7; ?>>管道/物流</option>
+                                <option value="4843" <?php echo $categoryIdHtml8; ?>>自动化</option>
+                                <option value="417" <?php echo $categoryIdHtml9; ?>>能源</option>
+                                <option value="4558" <?php echo $categoryIdHtml10; ?>>红石</option>
+                                <option value="436" <?php echo $categoryIdHtml11; ?>>食物/烹饪</option>
+                                <option value="416" <?php echo $categoryIdHtml12; ?>>农业</option>
+                                <option value="411" <?php echo $categoryIdHtml13; ?>>游戏机制</option>
+                                <option value="414" <?php echo $categoryIdHtml14; ?>>运输</option>
+                                <option value="420" <?php echo $categoryIdHtml15; ?>>仓储</option>
+                                <option value="4473" <?php echo $categoryIdHtml16; ?>>魔法</option>
+                                <option value="4475" <?php echo $categoryIdHtml17; ?>>冒险</option>
+                                <option value="424" <?php echo $categoryIdHtml18; ?>>装饰</option>
+                                <option value="434" <?php echo $categoryIdHtml19; ?>>装备/工具</option>
+                                <option value="133" <?php echo $categoryIdHtml20; ?>>性能优化</option>
+                                <option value="423" <?php echo $categoryIdHtml21; ?>>信息显示</option>
+                                <option value="435" <?php echo $categoryIdHtml22; ?>>服务器</option>
+                                <option value="5191" <?php echo $categoryIdHtml23; ?>>改良</option>
+                                <option value="421" <?php echo $categoryIdHtml24; ?>>支持库</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="SearchBottom">
+                        <label class="VersionInput">
+                            <span>版本</span>
+                            <input type="text" list="sourceList" id="VersionInput" value="<?php echo $gameVersionHtml; ?>">
+                            <datalist id="sourceList">
+                                <option value="全部">可以自行输入</option>
+                                <option value="1.20.1">1.20.1</option>
+                                <option value="1.20">1.20</option>
+                                <option value="1.19.4">1.19.4</option>
+                                <option value="1.18.2">1.18.2</option>
+                                <option value="1.17.1">1.17.1</option>
+                                <option value="1.16.5">1.16.5</option>
+                                <option value="1.15.2">1.15.2</option>
+                                <option value="1.14.4">1.14.4</option>
+                                <option value="1.13.2">1.13.2</option>
+                                <option value="1.12.2">1.12.2</option>
+                                <option value="1.11.2">1.11.2</option>
+                                <option value="1.10.2">1.10.2</option>
+                                <option value="1.9.4">1.9.4</option>
+                                <option value="1.8.9">1.8.9</option>
+                                <option value="1.7.10">1.7.10</option>
+                            </datalist>
+                        </label>
+                        <label class="LoaderSelect">
+                            <select id="LoaderSelect">
+                                <option value="" <?php echo $modLoaderTypeHtml1; ?>>任意 Mod 加载器</option>
+                                <option value="1" <?php echo $modLoaderTypeHtml2; ?>>Forge</option>
+                                <option value="4" <?php echo $modLoaderTypeHtml3; ?>>Fabric</option>
+                                <option value="5" <?php echo $modLoaderTypeHtml4; ?>>Quilt</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="SearchRight">
+                    <button class="SearchButton">搜索</button>
+                    <button class="ResetButton">重置条件</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="ListContainer" style="display: none;">
+    <div class="ListContainer" id="Search" style="display: none;">
         <div class="ListContent">
-            <div class="ListTitle Search">正在检索</div>
+            <div class="ModsLoading"></div>
         </div>
     </div>
-    <div class="ListContainer">
+    <div class="ListContainer" id="Mods">
         <div class="ListContent">
             <div class="Index">
-                <div class="Left">&lt;</div>
-                <p class="Num"><?php echo $_GET['index']; ?></p>
-                <div class="Right">&gt;</div>
+                <div class="Left" onclick="Up()">&lt;</div>
+                <p class="Num" id="IndexNum"><?php echo $_GET['index']; ?></p>
+                <div class="Right" onclick="Down()">&gt;</div>
             </div>
             <?php echo $Html; ?>
             <div class="Index">
-                <div class="Left">&lt;</div>
-                <p class="Num"><?php echo $_GET['index']; ?></p>
-                <div class="Right">&gt;</div>
+                <div class="Left" onclick="Up()">&lt;</div>
+                <p class="Num" id="IndexNum"><?php echo $_GET['index']; ?></p>
+                <div class="Right" onclick="Down()">&gt;</div>
             </div>
         </div>
     </div>
-    <div class="Top" style="display: none;"><a href="#Top">↑</a></div>
+    <div id="BackTo" style="display: none;"><a href="#Top">↑</a></div>
     <script src="js/Mods.js"></script>
     <script src="js/Main.js"></script>
 </body>
