@@ -16,12 +16,12 @@ if (!file_exists($filename)) {
     $configData = array(
         'Name' => $Name,
         'Version' => '1.0.0',
-        'Theme' => '洱海蓝',
+        'Theme' => 'Erhai_lake',
         'ThemeColor' => '#80CEFF',
         'grayscale' => false,
         'Hitokoto' => true,
-        'Custom' => false,
-        'CustomURL' => '',
+        'Custom' => true,
+        'CustomURL' => 'CustomTest.php',
         'Source' => 3
     );
     $jsonData = json_encode($configData);
@@ -32,13 +32,17 @@ if (!file_exists($filename)) {
 
 // 读取配置文件
 $Config = json_decode(file_get_contents($Name . "/config.json"), true);
+// 启动器版本
+$ConfigVersion = $Config["Version"];
 // 主题色
-$ThemeColor = $Config["ThemeColor"];
-
+$ConfigThemeColor = $Config["ThemeColor"];
 // 灰白
 if ($Config["grayscale"]) {
-    $grayscale = '* {filter: grayscale(95%);-webkit-filter: grayscale(95%);-moz-filter: grayscale(95%);-ms-filter: grayscale(95%);-o-filter: grayscale(95%);}';
+    $ConfigGrayscale = '* {filter: grayscale(95%);-webkit-filter: grayscale(95%);-moz-filter: grayscale(95%);-ms-filter: grayscale(95%);-o-filter: grayscale(95%);}';
 }
+
+// 日志输出
+Logs($Name, 'Main', '程序版本:' . $ConfigVersion);
 ?>
 <!DOCTYPE html>
 <html lang="zh_CN">
@@ -52,16 +56,16 @@ if ($Config["grayscale"]) {
     <link rel="stylesheet" href="css/icon.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
-        <?php echo $grayscale; ?>.Main {
-            background: <?php echo $ThemeColor . '30'; ?>;
+        <?php echo $ConfigGrayscale; ?>.Main {
+            background: <?php echo $ConfigThemeColor . '30'; ?>;
         }
 
         .Main .Submenu {
-            background: <?php echo $ThemeColor; ?>;
+            background: <?php echo $ConfigThemeColor; ?>;
         }
 
         .Main .Submenu .Selected {
-            color: <?php echo $ThemeColor; ?>;
+            color: <?php echo $ConfigThemeColor; ?>;
         }
     </style>
 </head>

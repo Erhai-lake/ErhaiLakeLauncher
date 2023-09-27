@@ -134,21 +134,23 @@ if (isset($_GET['SourceSelect'])) {
         if (isset($_GET['modLoaderType'])) {
             $modLoaderType = $_GET['modLoaderType'];
             switch ($_GET['modLoaderType']) {
-                case '1':
+                case '1|forge':
                     $modLoaderTypeHtml2 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[1];
                     break;
-                case '4':
+                case '4|fabric':
                     $modLoaderTypeHtml3 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[1];
                     break;
-                case '5':
+                case '5|quilt':
                     $modLoaderTypeHtml4 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[1];
                     break;
             }
         } else {
-            $modLoaderType = '0';
+            $modLoaderType = '';
             $modLoaderTypeHtml1 = 'selected';
         }
-
         $Html = Modrinth(json_decode(ModrinthModsSearch($category, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
     } else {
         $select2 = 'selected';
@@ -275,18 +277,21 @@ if (isset($_GET['SourceSelect'])) {
         if (isset($_GET['modLoaderType'])) {
             $modLoaderType = $_GET['modLoaderType'];
             switch ($_GET['modLoaderType']) {
-                case '1':
+                case '1|forge':
                     $modLoaderTypeHtml2 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[0];
                     break;
-                case '4':
+                case '4|fabric':
                     $modLoaderTypeHtml3 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[0];
                     break;
-                case '5':
+                case '5|quilt':
                     $modLoaderTypeHtml4 = 'selected';
+                    $modLoaderType = explode('|', $_GET['modLoaderType'])[0];
                     break;
             }
         } else {
-            $modLoaderType = '0';
+            $modLoaderType = '';
             $modLoaderTypeHtml1 = 'selected';
         }
         $Html = CurseForge(json_decode(CurseforgeModsSearch($CurseForgeKey, $category, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
@@ -561,9 +566,9 @@ function downloadCount($number)
                         <label class="LoaderSelect">
                             <select id="LoaderSelect">
                                 <option value="" <?php echo $modLoaderTypeHtml1; ?>>任意 Mod 加载器</option>
-                                <option value="1" <?php echo $modLoaderTypeHtml2; ?>>Forge</option>
-                                <option value="4" <?php echo $modLoaderTypeHtml3; ?>>Fabric</option>
-                                <option value="5" <?php echo $modLoaderTypeHtml4; ?>>Quilt</option>
+                                <option value="1|forge" <?php echo $modLoaderTypeHtml2; ?>>Forge</option>
+                                <option value="4|fabric" <?php echo $modLoaderTypeHtml3; ?>>Fabric</option>
+                                <option value="5|quilt" <?php echo $modLoaderTypeHtml4; ?>>Quilt</option>
                             </select>
                         </label>
                     </div>
