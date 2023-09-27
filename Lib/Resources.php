@@ -146,16 +146,78 @@ function AllVersions($VersionFile)
 }
 
 // Curseforge搜索模组
-// 参数:Key,分类ID,游戏版本,关键词,模组加载器,索引,数量(最大50)
+// 参数:Key,分类ID,游戏版本,关键词,mod加载器,索引,数量(最大50)
 // 返回:结果
-function CurseforgeModsSearch($Key = '', $categoryId = 0, $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 50)
+function CurseforgeModsSearch($Key = '', $category = 0, $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 50)
 {
     $curl = curl_init();
-    $url = 'https://api.curseforge.com/v1/mods/search?gameId=432&sortField=2&sortOrder=1&' . 'categoryId=' . $categoryId . '&gameVersion=' . $gameVersion . '&searchFilter=' . $searchFilter . '&modLoaderType=' . $modLoaderType . '&index=' . ($pageSize * $index) . '&pageSize=' . $pageSize;
-    $headers = array(
-        'X-API-Key: ' . $Key,
-        'Accept: application/json'
-    );
+    // Api
+    $url = 'https://api.curseforge.com/v1/mods/search';
+    // 游戏ID
+    $url .= '?gameId=432';
+    // 排列方式
+    $url .= '&sortField=2';
+    // 排序字段
+    $url .= '&sortOrder=1';
+    // 分类ID
+    $url .= '&categoryId=' . $category;
+    // 游戏版本
+    $url .= '&gameVersion=' . $gameVersion;
+    // 关键词
+    $url .= '&searchFilter=' . $searchFilter;
+    // mod加载器
+    $url .= '&modLoaderType=' . $modLoaderType;
+    // 索引
+    $url .= '&index=' . ($pageSize * $index);
+    // 数量
+    $url .= '&pageSize=' . $pageSize;
+
+    $headers = array('X-API-Key: ' . $Key, 'Accept: application/json');
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 50);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($curl);
+    curl_close($curl);
+    return $data;
+}
+
+// modrinth搜索模组
+// 参数:分类,游戏版本,关键词,mod加载器,索引,数量(最大100)
+// 返回:结果
+function ModrinthModsSearch($category = '', $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 100)
+{
+    $curl = curl_init();
+    // Api
+    $url = 'https://api.modrinth.com/v2/search';
+    // 关键词
+    $url .= '?query=' . $searchFilter;
+    $facets = [];
+    // 分类
+    if (!empty($category)) {
+        $facets[] = ["categories = " . $category];
+    }
+    // 游戏版本
+    if (!empty($gameVersion)) {
+        $facets[] = ["versions = " . $gameVersion];
+    }
+    // mod加载器
+    if (!empty($modLoaderType)) {
+        $facets[] = ["categories = " . $modLoaderType];
+    }
+    // 过滤器
+    if (!empty($facets)) {
+        $url .= '&facets=' . json_encode($facets);
+    }
+    // 排列方式
+    $url .= '&index=relevance';
+    // 索引
+    $url .= '&offset=' . ($pageSize * $index);
+    // 数量
+    $url .= '&limit=' . $pageSize;
+
+    $headers = array('User-Agent: erhai-lake/ELL/ (Erhai_lake@fuzixuan0714_0826@163.com)', 'Accept: application/json');
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_TIMEOUT, 50);

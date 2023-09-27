@@ -13,93 +13,100 @@ $ThemeColor = $Config["ThemeColor"];
 if (isset($_GET['SourceSelect'])) {
     if ($_GET['SourceSelect'] == 'Modrinth') {
         $select1 = 'selected';
-        $Html = '<div class="ListTitle">别催啦!!!在研究文档啊!!!</div>';
-    } else {
-        $select2 = 'selected';
-
-        // 公共的Key
-        $CurseForgeKey = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
-
         // 分类检索
         if (isset($_GET['categoryId'])) {
-            $categoryId = $_GET['categoryId'];
+            $category = $_GET['categoryId'];
             switch ($_GET['categoryId']) {
                 case '0':
-                    $categoryIdHtml1 = 'selected';
+                    $categoryHtml1 = 'selected';
                     break;
-                case '406':
-                    $categoryIdHtml2 = 'selected';
+                case '406|world-generation':
+                    $categoryHtml2 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
                 case '410':
-                    $categoryIdHtml3 = 'selected';
+                    $categoryHtml3 = 'selected';
                     break;
                 case '408':
-                    $categoryIdHtml4 = 'selected';
+                    $categoryHtml4 = 'selected';
                     break;
                 case '409':
-                    $categoryIdHtml5 = 'selected';
+                    $categoryHtml5 = 'selected';
                     break;
-                case '412':
-                    $categoryIdHtml6 = 'selected';
+                case '412|technology':
+                    $categoryHtml6 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
                 case '415':
-                    $categoryIdHtml7 = 'selected';
+                    $categoryHtml7 = 'selected';
                     break;
                 case '4843':
-                    $categoryIdHtml8 = 'selected';
+                    $categoryHtml8 = 'selected';
                     break;
                 case '417':
-                    $categoryIdHtml9 = 'selected';
+                    $categoryHtml9 = 'selected';
                     break;
                 case '4558':
-                    $categoryIdHtml10 = 'selected';
+                    $categoryHtml10 = 'selected';
                     break;
-                case '436':
-                    $categoryIdHtml11 = 'selected';
+                case '436|food':
+                    $categoryHtml11 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
                 case '416':
-                    $categoryIdHtml12 = 'selected';
+                    $categoryHtml12 = 'selected';
                     break;
-                case '411':
-                    $categoryIdHtml13 = 'selected';
+                case '411|game-mechanics':
+                    $categoryHtml13 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '414':
-                    $categoryIdHtml14 = 'selected';
+                case '414|transportation':
+                    $categoryHtml14 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '420':
-                    $categoryIdHtml15 = 'selected';
+                case '420|storage':
+                    $categoryHtml15 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '4473':
-                    $categoryIdHtml16 = 'selected';
+                case '4473|magic':
+                    $categoryHtml16 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '4475':
-                    $categoryIdHtml17 = 'selected';
+                case '4475|adventure':
+                    $categoryHtml17 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '424':
-                    $categoryIdHtml18 = 'selected';
+                case '424|decoration':
+                    $categoryHtml18 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '434':
-                    $categoryIdHtml19 = 'selected';
+                case '434|equipment':
+                    $categoryHtml19 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '133':
-                    $categoryIdHtml20 = 'selected';
+                case '133|optimization':
+                    $categoryHtml20 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
                 case '423':
-                    $categoryIdHtml21 = 'selected';
+                    $categoryHtml21 = 'selected';
                     break;
-                case '435':
-                    $categoryIdHtml22 = 'selected';
+                case '435|social':
+                    $categoryHtml22 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '5191':
-                    $categoryIdHtml23 = 'selected';
+                case '5191|utility':
+                    $categoryHtml23 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
-                case '421':
-                    $categoryIdHtml24 = 'selected';
+                case '421|library':
+                    $categoryHtml24 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[1];
                     break;
             }
         } else {
-            $categoryId = '';
-            $categoryIdHtml1 = 'selected';
+            $category = '';
+            $categoryHtml1 = 'selected';
         }
 
         // 游戏版本号检索
@@ -141,7 +148,148 @@ if (isset($_GET['SourceSelect'])) {
             $modLoaderType = '0';
             $modLoaderTypeHtml1 = 'selected';
         }
-        $Html = CurseForge(json_decode(CurseforgeModsSearch($CurseForgeKey, $categoryId, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
+
+        $Html = Modrinth(json_decode(ModrinthModsSearch($category, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
+    } else {
+        $select2 = 'selected';
+        // 公共的Key
+        $CurseForgeKey = '$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.';
+        // 分类检索
+        if (isset($_GET['categoryId'])) {
+            $category = $_GET['categoryId'];
+            switch ($_GET['categoryId']) {
+                case '0':
+                    $categoryHtml1 = 'selected';
+                    break;
+                case '406|world-generation':
+                    $categoryHtml2 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '410':
+                    $categoryHtml3 = 'selected';
+                    break;
+                case '408':
+                    $categoryHtml4 = 'selected';
+                    break;
+                case '409':
+                    $categoryHtml5 = 'selected';
+                    break;
+                case '412|technology':
+                    $categoryHtml6 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '415':
+                    $categoryHtml7 = 'selected';
+                    break;
+                case '4843':
+                    $categoryHtml8 = 'selected';
+                    break;
+                case '417':
+                    $categoryHtml9 = 'selected';
+                    break;
+                case '4558':
+                    $categoryHtml10 = 'selected';
+                    break;
+                case '436|food':
+                    $categoryHtml11 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '416':
+                    $categoryHtml12 = 'selected';
+                    break;
+                case '411|game-mechanics':
+                    $categoryHtml13 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '414|transportation':
+                    $categoryHtml14 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '420|storage':
+                    $categoryHtml15 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '4473|magic':
+                    $categoryHtml16 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '4475|adventure':
+                    $categoryHtml17 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '424|decoration':
+                    $categoryHtml18 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '434|equipment':
+                    $categoryHtml19 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '133|optimization':
+                    $categoryHtml20 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '423':
+                    $categoryHtml21 = 'selected';
+                    break;
+                case '435|social':
+                    $categoryHtml22 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '5191|utility':
+                    $categoryHtml23 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+                case '421|library':
+                    $categoryHtml24 = 'selected';
+                    $category = explode('|', $_GET['categoryId'])[0];
+                    break;
+            }
+        } else {
+            $category = '';
+            $categoryHtml1 = 'selected';
+        }
+
+        // 游戏版本号检索
+        if (isset($_GET['gameVersion'])) {
+            if ($_GET['gameVersion'] == '全部') {
+                $gameVersion = '';
+                $gameVersionHtml = '全部';
+            } else {
+                $gameVersion = $_GET['gameVersion'];
+                $gameVersionHtml = $_GET['gameVersion'];
+            }
+        } else {
+            $gameVersion = '';
+            $gameVersionHtml = '全部';
+        }
+
+        // 关键词检索
+        if (isset($_GET['searchFilter'])) {
+            $searchFilter = $_GET['searchFilter'];
+        } else {
+            $searchFilter = '';
+        }
+
+        // mod加载器检索
+        if (isset($_GET['modLoaderType'])) {
+            $modLoaderType = $_GET['modLoaderType'];
+            switch ($_GET['modLoaderType']) {
+                case '1':
+                    $modLoaderTypeHtml2 = 'selected';
+                    break;
+                case '4':
+                    $modLoaderTypeHtml3 = 'selected';
+                    break;
+                case '5':
+                    $modLoaderTypeHtml4 = 'selected';
+                    break;
+            }
+        } else {
+            $modLoaderType = '0';
+            $modLoaderTypeHtml1 = 'selected';
+        }
+        $Html = CurseForge(json_decode(CurseforgeModsSearch($CurseForgeKey, $category, $gameVersion, $searchFilter, $modLoaderType, $_GET['index'], 50), true));
     }
 }
 
@@ -156,44 +304,98 @@ function CurseForge($json)
         $Html .= '<div class="ItemSummary">';
         $item2Num = 0;
         foreach ($item1['categories'] as $item2) {
-            if ($item2Num != 40) {
-                $item2Num++;
-                $replacements = array(
-                    '/World Gen/' => '世界元素',
-                    '/Biomes/' => '生物群系',
-                    '/Dimensions/' => '维度',
-                    '/Ores and Resources/' => '矿石/资源',
-                    '/Structures/' => '天然结构',
-                    '/Technology/' => '科技',
-                    '/Energy, Fluid, and Item Transport/' => '管道/物流',
-                    '/Automation/' => '自动化',
-                    '/Energy/' => '能源',
-                    '/Redstone/' => '红石',
-                    '/Food/' => '食物/烹饪',
-                    '/Farming/' => '农业',
-                    '/Mobs/' => '游戏机制',
-                    '/Player Transport/' => '运输',
-                    '/Storage/' => '仓储',
-                    '/Magic/' => '魔法',
-                    '/Adventure and RPG/' => '冒险',
-                    '/Cosmetic/' => '装饰',
-                    '/Armor, Tools, and Weapons/' => '装备/工具',
-                    '/Miscellaneous/' => '性能优化',
-                    '/Map and Information/' => '信息显示',
-                    '/Server Utility/' => '服务器',
-                    '/Utility & QoL/' => '改良',
-                    '/API and Library/' => '支持库',
-                );
-                $Html .= '<p class="Categories">' . preg_replace(array_keys($replacements), array_values($replacements), $item2['name']) . '</p>';
+            if ($item2Num != 4) {
+                if ($item2 != 'forge' && $item2 != 'fabric' && $item2 != 'quilt') {
+                    $item2Num++;
+                    $replacements = array(
+                        '/World Gen/' => '世界元素',
+                        '/Biomes/' => '生物群系',
+                        '/Dimensions/' => '维度',
+                        '/Ores and Resources/' => '矿石/资源',
+                        '/Structures/' => '天然结构',
+                        '/Technology/' => '科技',
+                        '/Energy, Fluid, and Item Transport/' => '管道/物流',
+                        '/Automation/' => '自动化',
+                        '/Energy/' => '能源',
+                        '/Redstone/' => '红石',
+                        '/Food/' => '食物/烹饪',
+                        '/Farming/' => '农业',
+                        '/Mobs/' => '游戏机制',
+                        '/Player Transport/' => '运输',
+                        '/Storage/' => '仓储',
+                        '/Magic/' => '魔法',
+                        '/Adventure and RPG/' => '冒险',
+                        '/Cosmetic/' => '装饰',
+                        '/Armor, Tools, and Weapons/' => '装备/工具',
+                        '/Miscellaneous/' => '性能优化',
+                        '/Map and Information/' => '信息显示',
+                        '/Server Utility/' => '服务器',
+                        '/Utility & QoL/' => '改良',
+                        '/API and Library/' => '支持库',
+                    );
+                    $Html .= '<p class="Categories">' . preg_replace(array_keys($replacements), array_values($replacements), $item2['name']) . '</p>';
+                }
             }
         }
         $Html .= '<p class="Summary" title="' . $item1['summary'] . '">' . $item1['summary'] . '</p>
     </div><div class="ItemElse">';
+        // $Html .= '<p><i class="icon icon-shezhi"></i>' . downloadCount($item1['downloadCount']) . '</p>';
         $Html .= '<p><i class="icon icon-xiazaidaoru"></i>' . downloadCount($item1['downloadCount']) . '</p>';
         $Html .= '<p><i class="icon icon-anquan"></i>' . date('Y-m-d H:i:s', strtotime($item1['dateModified'])) . '</p>';
-        $Html .= '<p><i class="icon icon-huojian"></i>curseforge</p>';
+        $Html .= '<p><i class="icon icon-huojian"></i>CurseForge</p>';
         $Html .= '</div></div><div class="RightRight">';
-        $Html .= '<i class="icon icon-tishi" title="curseforge" onclick="window.open(\'' . $item1['links']['websiteUrl'] . '\'); event.stopPropagation();"></i>';
+        $Html .= '<i class="icon icon-tishi" title="CurseForge" onclick="window.open(\'' . $item1['links']['websiteUrl'] . '\'); event.stopPropagation();"></i>';
+        $Html .= '</div></div></div>';
+    }
+    return $Html;
+}
+
+function Modrinth($json)
+{
+    $Html = '';
+    foreach ($json['hits'] as $item1) {
+        $Html .= '<div class="ListItem" onclick="ModID(\'' . $item1['project_id'] . '\')">';
+        $Html .= '<div class="Left" style="background: url(\'' . $item1['icon_url'] . '\') no-repeat 100% 100%/100% 100%;"></div>';
+        $Html .= '<div class="Right"><div class="RightLeft">';
+        $Html .= '<p class="ItemName">' . $item1['title'] . '</p>';
+        $Html .= '<div class="ItemSummary">';
+        $item2Num = 0;
+        $modLoader = '';
+        foreach ($item1['categories'] as $item2) {
+            if ($item2Num != 4) {
+                if ($item2 != 'forge' && $item2 != 'fabric' && $item2 != 'quilt') {
+                    $item2Num++;
+                    $replacements = array(
+                        '/world-generation/' => '世界元素',
+                        '/technology/' => '科技',
+                        '/food/' => '食物/烹饪',
+                        '/game-mechanics/' => '游戏机制',
+                        '/transportation/' => '运输',
+                        '/storage/' => '仓储',
+                        '/magic/' => '魔法',
+                        '/adventure/' => '冒险',
+                        '/decoration/' => '装饰',
+                        '/mobs/' => '生物',
+                        '/equipment/' => '装备/工具',
+                        '/optimization/' => '性能优化',
+                        '/social/' => '服务器',
+                        '/utility/' => '改良',
+                        '/library/' => '支持库',
+                    );
+                    $Html .= '<p class="Categories">' . preg_replace(array_keys($replacements), array_values($replacements), $item2) . '</p>';
+                } else {
+                    $modLoader .= ' ' . $item2 . ' ';
+                }
+            }
+        }
+        $Html .= '<p class="Summary" title="' . $item1['description'] . '">' . $item1['description'] . '</p>
+    </div><div class="ItemElse">';
+        $Html .= '<p><i class="icon icon-shezhi"></i>' . $modLoader . '</p>';
+        $Html .= '<p><i class="icon icon-xiazaidaoru"></i>' . downloadCount($item1['downloads']) . '</p>';
+        $Html .= '<p><i class="icon icon-anquan"></i>' . date('Y-m-d H:i:s', strtotime($item1['date_modified'])) . '</p>';
+        $Html .= '<p><i class="icon icon-huojian"></i>Modrinth</p>';
+        $Html .= '</div></div><div class="RightRight">';
+        $Html .= '<i class="icon icon-tishi" title="Modrinth" onclick="window.open(\'https://modrinth.com/mod/' . $item1['slug'] . '\'); event.stopPropagation();"></i>';
         $Html .= '</div></div></div>';
     }
     return $Html;
@@ -306,30 +508,30 @@ function downloadCount($number)
                         <label class="TypeSelect">
                             <span>类型</span>
                             <select id="TypeSelect">
-                                <option value="0" <?php echo $categoryIdHtml1; ?>>全部</option>
-                                <option value="406" <?php echo $categoryIdHtml2; ?>>世界元素</option>
-                                <option value="410" <?php echo $categoryIdHtml3; ?>>维度</option>
-                                <option value="408" <?php echo $categoryIdHtml4; ?>>矿石/资源</option>
-                                <option value="409" <?php echo $categoryIdHtml5; ?>>天然结构</option>
-                                <option value="412" <?php echo $categoryIdHtml6; ?>>科技</option>
-                                <option value="415" <?php echo $categoryIdHtml7; ?>>管道/物流</option>
-                                <option value="4843" <?php echo $categoryIdHtml8; ?>>自动化</option>
-                                <option value="417" <?php echo $categoryIdHtml9; ?>>能源</option>
-                                <option value="4558" <?php echo $categoryIdHtml10; ?>>红石</option>
-                                <option value="436" <?php echo $categoryIdHtml11; ?>>食物/烹饪</option>
-                                <option value="416" <?php echo $categoryIdHtml12; ?>>农业</option>
-                                <option value="411" <?php echo $categoryIdHtml13; ?>>游戏机制</option>
-                                <option value="414" <?php echo $categoryIdHtml14; ?>>运输</option>
-                                <option value="420" <?php echo $categoryIdHtml15; ?>>仓储</option>
-                                <option value="4473" <?php echo $categoryIdHtml16; ?>>魔法</option>
-                                <option value="4475" <?php echo $categoryIdHtml17; ?>>冒险</option>
-                                <option value="424" <?php echo $categoryIdHtml18; ?>>装饰</option>
-                                <option value="434" <?php echo $categoryIdHtml19; ?>>装备/工具</option>
-                                <option value="133" <?php echo $categoryIdHtml20; ?>>性能优化</option>
-                                <option value="423" <?php echo $categoryIdHtml21; ?>>信息显示</option>
-                                <option value="435" <?php echo $categoryIdHtml22; ?>>服务器</option>
-                                <option value="5191" <?php echo $categoryIdHtml23; ?>>改良</option>
-                                <option value="421" <?php echo $categoryIdHtml24; ?>>支持库</option>
+                                <option value="0" <?php echo $categoryHtml1; ?>>全部</option>
+                                <option value="406|world-generation" <?php echo $categoryHtml2; ?>>世界元素</option>
+                                <option value="410" <?php echo $categoryHtml3; ?>>维度</option>
+                                <option value="408" <?php echo $categoryHtml4; ?>>矿石/资源</option>
+                                <option value="409" <?php echo $categoryHtml5; ?>>天然结构</option>
+                                <option value="412|technology" <?php echo $categoryHtml6; ?>>科技</option>
+                                <option value="415" <?php echo $categoryHtml7; ?>>管道/物流</option>
+                                <option value="4843" <?php echo $categoryHtml8; ?>>自动化</option>
+                                <option value="417" <?php echo $categoryHtml9; ?>>能源</option>
+                                <option value="4558" <?php echo $categoryHtml10; ?>>红石</option>
+                                <option value="436|food" <?php echo $categoryHtml11; ?>>食物/烹饪</option>
+                                <option value="416" <?php echo $categoryHtml12; ?>>农业</option>
+                                <option value="411|game-mechanics" <?php echo $categoryHtml13; ?>>游戏机制</option>
+                                <option value="414|transportation" <?php echo $categoryHtml14; ?>>运输</option>
+                                <option value="420|storage" <?php echo $categoryHtml15; ?>>仓储</option>
+                                <option value="4473|magic" <?php echo $categoryHtml16; ?>>魔法</option>
+                                <option value="4475|adventure" <?php echo $categoryHtml17; ?>>冒险</option>
+                                <option value="424|decoration" <?php echo $categoryHtml18; ?>>装饰</option>
+                                <option value="434|equipment" <?php echo $categoryHtml19; ?>>装备/工具</option>
+                                <option value="133|optimization" <?php echo $categoryHtml20; ?>>性能优化</option>
+                                <option value="423" <?php echo $categoryHtml21; ?>>信息显示</option>
+                                <option value="435|social" <?php echo $categoryHtml22; ?>>服务器</option>
+                                <option value="5191|utility" <?php echo $categoryHtml23; ?>>改良</option>
+                                <option value="421|library" <?php echo $categoryHtml24; ?>>支持库</option>
                             </select>
                         </label>
                     </div>
