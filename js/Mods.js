@@ -52,16 +52,16 @@ SearchButton.addEventListener('click', function () {
 // 检索函数
 function SearchFunction(index, searchFilter, SourceSelect, gameVersion, categoryId, modLoaderType) {
     let URL = 'Mods.php?index=' + index + '&searchFilter=' + encodeURIComponent(searchFilter) + '&SourceSelect=' + SourceSelect + "&gameVersion=" + gameVersion + "&categoryId=" + categoryId + "&modLoaderType=" + modLoaderType;
-    console.log(URL);
     window.location.href = URL;
 }
 
 // 回车事件
-searchFilter.addEventListener('keydown', function (event) {
-    if (event.key === 13) {
+searchFilter.addEventListener('keyup', function (event) {
+    event.preventDefault();
+    if (event.key == 'Enter') {
         SearchButton.click();
     }
-});
+})
 
 // 重置条件
 ResetButton.addEventListener('click', function () {
