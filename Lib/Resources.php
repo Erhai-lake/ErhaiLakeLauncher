@@ -1,9 +1,22 @@
 <?php
 // 资源类
 
-// 初始化源
-// 参数:源(0:官方,1:BMCLAPI,2:MCBBS,3:自动选择;默认:0)
-// 返回:下载源json,1:无法读取下载源文件,2:下载源文件解析失败,3:源不存在
+/**
+ * [资源类]初始化源
+ *
+ * 此函数用于初始化下载源
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param int $Source 0 官方,1 BMCLAPI,2 MCBBS,3 自动选择,默认 0
+ * @return array 下载源json,结构如下：
+ *   - '版本列表' (string)：版本列表链接
+ *   - '版本json文件' (string)：版本json文件链接
+ *   - '资源索引文件' (string)：资源索引文件链接
+ *   - '资源文件' (string)：资源文件链接
+ *   - '游戏主文件' (string)：游戏主文件链接
+ *   - '依赖库文件' (string)：依赖库文件链接
+ *   - 'natives库文件' (string)：natives库文件链接
+ * @return int 返回状态码:1 无法读取下载源文件,2 下载源文件解析失败,3 源不存在
+ */
 function InitializeSource($Source = 0)
 {
     // 读取MCSource.json文件
@@ -65,9 +78,15 @@ function InitializeSource($Source = 0)
     }
 }
 
-// 初始化版本文件
-// 参数:下载源(通过 InitializeSource() 获取)
-// 返回:版本文件,1:无法读取版本文件
+/**
+ * [资源类]初始化版本文件
+ *
+ * 此函数用于初始化版本文件
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $Source 下载源(通过 InitializeSource() 获取)
+ * @return string 版本文件
+ * @return int 返回状态码:1 无法读取下载源文件
+ */
 function InitializeVersionFile($Source)
 {
     // 读取版本文件
@@ -85,9 +104,15 @@ function InitializeVersionFile($Source)
     }
 }
 
-// 获取最新的正式版本
-// 参数:版本文件(通过 InitializeVersionFile() 获取)
-// 返回:最新的正式版本,1:版本文件解析失败,2:不存在
+/**
+ * [资源类]获取最新的正式版本
+ *
+ * 此函数用于获取最新的正式版本
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $VersionFile 下载源(通过 InitializeVersionFile() 获取)
+ * @return string 最新的正式版本
+ * @return int 返回状态码:1 版本文件解析失败,2 不存在
+ */
 function LatestOfficiaVersion($VersionFile)
 {
     // 解析JSON内容
@@ -105,9 +130,15 @@ function LatestOfficiaVersion($VersionFile)
     }
 }
 
-// 获取最新的快照
-// 参数:版本文件(通过 InitializeVersionFile() 获取)
-// 返回:最新的快照,1:版本文件解析失败,2:不存在
+/**
+ * [资源类]获取最新的快照
+ *
+ * 此函数用于获取最新的快照
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $VersionFile 下载源(通过 InitializeVersionFile() 获取)
+ * @return string 最新的快照
+ * @return int 返回状态码:1 版本文件解析失败,2 不存在
+ */
 function LatestBetaVersion($VersionFile)
 {
     // 解析JSON内容
@@ -125,9 +156,20 @@ function LatestBetaVersion($VersionFile)
     }
 }
 
-// 获取所有版本
-// 参数:版本文件(通过 InitializeVersionFile() 获取)
-// 返回:所有版本数组,1:版本文件解析失败,2:不存在
+/**
+ * [资源类]获取所有版本
+ *
+ * 此函数用于获取所有版本
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $VersionFile 下载源(通过 InitializeVersionFile() 获取)
+ * @return array 所有版本数组,结构如下：
+ *   - 'id' (string)：游戏版本号
+ *   - 'type' (string):版本类型
+ *   - 'url' (string):版本json链接
+ *   - 'time' (string):时间
+ *   - 'releaseTime' (string):构建时间
+ * @return int 返回状态码:1 版本文件解析失败,2 不存在
+ */
 function AllVersions($VersionFile)
 {
     // 解析JSON内容
@@ -145,9 +187,20 @@ function AllVersions($VersionFile)
     }
 }
 
-// Curseforge搜索模组
-// 参数:Key,分类ID,游戏版本,关键词,mod加载器,索引,数量(最大50)
-// 返回:结果
+ /**
+  * [资源类]Curseforge搜索模组
+  *
+ * 此函数用于Curseforge搜索模组
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+  * @param string $Key 秘钥
+  * @param integer $category 分类ID
+  * @param string $gameVersion 游戏版本
+  * @param string $searchFilter 关键词
+  * @param string $modLoaderType mod加载器
+  * @param integer $index 索引
+  * @param integer $pageSize 数量(最大50)
+  * @return array 结果,结构看官方文档(https://docs.curseforge.com/#search-mods)
+  */
 function CurseforgeModsSearch($Key = '', $category = 0, $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 50)
 {
     $curl = curl_init();
@@ -183,9 +236,19 @@ function CurseforgeModsSearch($Key = '', $category = 0, $gameVersion = '', $sear
     return $data;
 }
 
-// modrinth搜索模组
-// 参数:分类,游戏版本,关键词,mod加载器,索引,数量(最大100)
-// 返回:结果
+ /**
+  * [资源类]modrinth搜索模组
+  *
+ * 此函数用于modrinth搜索模组
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+  * @param integer $category 分类
+  * @param string $gameVersion 游戏版本
+  * @param string $searchFilter 关键词
+  * @param string $modLoaderType mod加载器
+  * @param integer $index 索引
+  * @param integer $pageSize 数量(最大100)
+  * @return array 结果,结构看官方文档(https://docs.modrinth.com/api-spec#tag/projects/operation/searchProjects)
+  */
 function ModrinthModsSearch($category = '', $gameVersion = '', $searchFilter = '', $modLoaderType = '', $index = 0, $pageSize = 100)
 {
     $curl = curl_init();

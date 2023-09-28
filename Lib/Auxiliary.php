@@ -1,10 +1,16 @@
 <?php
 // 辅助类
 
-// 初始化
-// 参数:启动器名称,游戏目录
-// 返回:0:成功,1:失败
-function Initialize($name = "ELL", $GameCatalog = "")
+/**
+ * [辅助类]初始化启动器
+ *
+ * 此函数用于初始化启动器
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $name 启动器名称
+ * @param string $GameCatalog 游戏目录
+ * @return int 返回状态码:0 表示成功,1 表示失败。
+ */
+function Initialize($name = 'ELL', $GameCatalog = '')
 {
 
     if ($GameCatalog == "") {
@@ -42,9 +48,15 @@ function Initialize($name = "ELL", $GameCatalog = "")
     }
 }
 
-// 用户名获取UUID
-// 参数:用户名
-// 返回:UUID,1:读取失败,2:解析失败,3:源不存在
+/**
+ * [辅助类]用户名获取UUID
+ *
+ * 此函数可以通过用户名,获取UUID
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $name 用户名
+ * @return string UUID
+ * @return int 返回状态码:1 读取失败,2 解析失败,3 源不存在
+ */
 function NameUUID($name)
 {
     // 读取MCSource.json文件
@@ -69,9 +81,15 @@ function NameUUID($name)
     }
 }
 
-// UUID获取用户名
-// 参数:UUID
-// 返回:用户名,1:读取失败,2:解析失败,3:源不存在
+/**
+ * [辅助类]UUID获取用户名
+ *
+ * 此函数可以通过UUID,获取用户
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $UUID 玩家唯一标识符
+ * @return string 用户名
+ * @return int 返回状态码:1 读取失败,2 解析失败,3 源不存在
+ */
 function UUIDName($UUID)
 {
     // 读取MCSource.json文件
@@ -96,9 +114,15 @@ function UUIDName($UUID)
     }
 }
 
-// 获取皮肤文件
-// 参数:UUID
-// 返回:皮肤文件,1:读取失败,2:解析失败,3:源不存在
+/**
+ * 获取皮肤文件
+ *
+ * 此函数可以通过UUID,获取玩家皮肤
+ * @author Erhai_lake (fuzixuan0714_0826@163.com)
+ * @param string $UUID 玩家唯一标识符
+ * @return string 皮肤文件
+ * @return int 回状态码:1 读取失败,2 解析失败,3 源不存在
+ */
 function Skin($UUID)
 {
     // 读取MCSource.json文件
