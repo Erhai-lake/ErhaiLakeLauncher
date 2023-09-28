@@ -40,9 +40,6 @@ $ConfigThemeColor = $Config["ThemeColor"];
 if ($Config["grayscale"]) {
     $ConfigGrayscale = '* {filter: grayscale(95%);-webkit-filter: grayscale(95%);-moz-filter: grayscale(95%);-ms-filter: grayscale(95%);-o-filter: grayscale(95%);}';
 }
-
-// 日志输出
-Logs($Name, 'Main', '程序版本:' . $ConfigVersion);
 ?>
 <!DOCTYPE html>
 <html lang="zh_CN">
